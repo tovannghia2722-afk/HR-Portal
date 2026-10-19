@@ -1,26 +1,34 @@
-<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>HR Portal</title>
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>HR Portal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f7f9;--cd:#fff;--tx:#1a1d23;--mu:#667085;--bd:#e4e7ec;--ac:#2563eb;--ok:#16a34a;--no:#dc2626;--wa:#d97706;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1115;--cd:#181b21;--tx:#e8eaee;--mu:#98a2b3;--bd:#2a2f38;--ac:#5b8def;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0f1115;--cd:#181b21;--tx:#e8eaee;--mu:#98a2b3;--bd:#2a2f38;--ac:#5b8def;color-scheme:dark}
-*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--cd);border-bottom:1px solid var(--bd)}
-h1{font-size:18px;margin:0}h2{font-size:16px;margin:0 0 10px}
-nav{display:flex;gap:6px;padding:10px 16px;overflow-x:auto}nav button{white-space:nowrap}
-button,select,input,textarea{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--bd);border-radius:8px;padding:7px 11px}
-button{cursor:pointer}button.on,button.p{background:var(--ac);border-color:var(--ac);color:#fff}
-main{padding:0 16px 24px;max-width:1000px;margin:auto}
-.cd{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px}
-.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:14px}
-.st b{display:block;font-size:26px}.mu{color:var(--mu);font-size:13px}.no{color:var(--no)}
-.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--bd);white-space:nowrap}th{color:var(--mu);font-weight:500;font-size:13px}
-.f{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:10px}.f textarea{grid-column:1/-1}
-.tag{padding:2px 8px;border-radius:99px;font-size:12px;border:1px solid currentColor}.Duyet{color:var(--ok)}.Tu{color:var(--no)}.Cho{color:var(--wa)}
-.sm{padding:3px 8px;font-size:12px}
-.lg{max-width:380px;margin:60px auto}.lg input{width:100%;margin-bottom:8px}
-.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal>div{min-height:72px;border:1px solid var(--bd);border-radius:8px;padding:4px;font-size:11px;overflow:hidden}
-.cal .h{min-height:0;border:0;text-align:center;color:var(--mu)}.cal .t{border-color:var(--ac)}.cal .x{opacity:.45}
-.ev{display:block;margin-top:2px;padding:1px 4px;border-radius:4px;background:color-mix(in srgb,var(--ok) 22%,transparent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ev.Cho{background:color-mix(in srgb,var(--wa) 25%,transparent)}
+:root{--bg:#f4f5fb;--cd:#fff;--tx:#1b1f3b;--mu:#6b7194;--bd:#e6e8f2;--ac:#4f46e5;--ac2:#7c3aed;--ok:#16a34a;--no:#dc2626;--wa:#d97706;--sh:0 1px 2px rgba(27,31,59,.05),0 6px 20px rgba(27,31,59,.07);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1020;--cd:#171a30;--tx:#eceefb;--mu:#9aa0c4;--bd:#262a48;--ac:#818cf8;--ac2:#a78bfa;--sh:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1020;--cd:#171a30;--tx:#eceefb;--mu:#9aa0c4;--bd:#262a48;--ac:#818cf8;--ac2:#a78bfa;--sh:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--tx);font:15px/1.55 "Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--cd);border-bottom:1px solid var(--bd);box-shadow:var(--sh)}
+h1{font-size:18px;margin:0;display:flex;align-items:center;font-weight:600}h2{font-size:16px;margin:0 0 12px;font-weight:600}
+.logo{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;font-weight:600;font-size:14px;margin-right:10px}
+.logo.big{width:58px;height:58px;font-size:20px;border-radius:16px;margin:0 auto 14px;display:flex}
+.us{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.av{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--ac);color:#fff;font-size:13px;font-weight:500}
+nav{display:flex;gap:6px;padding:14px 20px 6px;overflow-x:auto;max-width:1040px;margin:auto}nav button{white-space:nowrap;border:0;background:transparent;color:var(--mu);padding:8px 16px;border-radius:999px;font-weight:500}
+nav button:hover{background:color-mix(in srgb,var(--ac) 10%,transparent);color:var(--tx)}nav button.on{background:var(--ac);color:#fff;box-shadow:0 2px 8px color-mix(in srgb,var(--ac) 40%,transparent)}
+button,select,input,textarea{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:8px 12px;transition:all .15s}
+input:focus,select:focus,textarea:focus{outline:2px solid color-mix(in srgb,var(--ac) 45%,transparent);border-color:var(--ac)}
+button{cursor:pointer}button:hover{border-color:var(--ac)}button.p{background:linear-gradient(135deg,var(--ac),var(--ac2));border-color:transparent;color:#fff;font-weight:500}button.p:hover{filter:brightness(1.08)}
+main{padding:6px 20px 32px;max-width:1040px;margin:auto}
+.cd{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:var(--sh)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:16px}.g .cd{margin:0}
+.st{border-top:4px solid var(--c,var(--ac))}.g .st:nth-child(2){--c:var(--wa)}.g .st:nth-child(3){--c:var(--ok)}
+.st b{display:block;font-size:32px;font-weight:600;line-height:1.2}.mu{color:var(--mu);font-size:13px}.no{color:var(--no)}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--bd);white-space:nowrap}
+th{color:var(--mu);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.04em}tbody tr:hover td{background:color-mix(in srgb,var(--ac) 6%,transparent)}
+.f{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}.f textarea{grid-column:1/-1;min-height:70px}
+.tag{padding:2px 10px;border-radius:99px;font-size:12px;font-weight:500;background:color-mix(in srgb,currentColor 12%,transparent)}.Duyet{color:var(--ok)}.Tu{color:var(--no)}.Cho{color:var(--wa)}
+.sm{padding:4px 10px;font-size:12px;border-radius:8px}
+.lg{max-width:400px;margin:8vh auto;padding:30px;text-align:center}.lg input{width:100%;margin-bottom:10px}.lg h2{font-size:20px;margin-bottom:4px}.lg .p{width:100%;padding:11px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.cal>div{min-height:78px;border:1px solid var(--bd);border-radius:12px;padding:6px;font-size:11px;overflow:hidden}
+.cal .h{min-height:0;border:0;text-align:center;color:var(--mu);font-weight:500}.cal .t{border:2px solid var(--ac);background:color-mix(in srgb,var(--ac) 8%,transparent)}.cal .x{opacity:.35;border-style:dashed}
+.ev{display:block;margin-top:3px;padding:2px 6px;border-radius:6px;background:color-mix(in srgb,var(--ok) 22%,transparent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ev.Cho{background:color-mix(in srgb,var(--wa) 25%,transparent)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script></head><body><div id="app"><p style="padding:20px">Đang tải...</p></div>
 <script>
@@ -39,9 +47,9 @@ const r=await Promise.all([sb.from("profiles").select("*").order("name"),sb.from
 const er=r.find(x=>x.error);if(er)MSG="Lỗi tải dữ liệu: "+er.error.message;
 [P,L,C,A,SL]=r.map(x=>x.data||[]);ME=P.find(x=>x.id==u.id)||null;if(!ME&&!er)MSG="Không tìm thấy hồ sơ của tài khoản này";draw()}
 function draw(){const A_=document.getElementById("app");
-if(!ME){A_.innerHTML=`<div class="cd lg"><h2>Đăng nhập HR Portal</h2><input id="le" placeholder="Email" type="email"><input id="lp" type="password" placeholder="Mật khẩu" onkeydown="if(event.key=='Enter')login()"><p class="no">${esc(MSG)}</p><button class="p" onclick="login()">Đăng nhập</button></div>`;return}
+if(!ME){A_.innerHTML=`<div class="cd lg"><div class="logo big">HR</div><h2>Đăng nhập HR Portal</h2><p class="mu" style="margin:0 0 16px">Cổng nhân sự nội bộ</p><input id="le" placeholder="Email" type="email"><input id="lp" type="password" placeholder="Mật khẩu" onkeydown="if(event.key=='Enter')login()"><p class="no">${esc(MSG)}</p><button class="p" onclick="login()">Đăng nhập</button></div>`;return}
 const tabs=[["home","Tổng quan"],["cal","Lịch nghỉ"],["leave","Đơn nghỉ phép"],["pay","Bảng lương"]];if(hr())tabs.push(["emp","Nhân viên"]);
-A_.innerHTML=`<header><h1>HR Portal</h1><div>${esc(ME.name)} <span class="tag">${hr()?"Quản lý":"Nhân viên"}</span> <button class="sm" onclick="logout()">Đăng xuất</button></div></header><nav>${tabs.map(x=>`<button class="${x[0]==T?"on":""}" onclick="go('${x[0]}')">${x[1]}</button>`).join("")}</nav><main>${MSG?`<p class="no">${esc(MSG)}</p>`:""}${V[T]()}</main>`}
+A_.innerHTML=`<header><h1><span class="logo">HR</span>HR Portal</h1><div class="us"><span class="av">${esc(ME.name.trim().charAt(0).toUpperCase())}</span>${esc(ME.name)} <span class="tag">${hr()?"Quản lý":"Nhân viên"}</span> <button class="sm" onclick="logout()">Đăng xuất</button></div></header><nav>${tabs.map(x=>`<button class="${x[0]==T?"on":""}" onclick="go('${x[0]}')">${x[1]}</button>`).join("")}</nav><main>${MSG?`<p class="no">${esc(MSG)}</p>`:""}${V[T]()}</main>`}
 async function login(){MSG="";const r=await sb.auth.signInWithPassword({email:v("le"),password:v("lp")});if(r.error){MSG="Sai email hoặc mật khẩu";return draw()}await load()}
 async function logout(){await sb.auth.signOut();ME=null;T="home";MSG="";draw()}
 const V={
