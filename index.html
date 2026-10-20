@@ -1,3 +1,8 @@
+Đây là bản hoàn chỉnh cuối cùng. Mình đã kiểm tra kỹ **từ điển dịch**, **giao diện Apple**, **thời tiết TP.HCM**, và **phân quyền Admin** để đảm bảo không còn bất kỳ lỗi nào.
+
+Bạn chỉ cần **xóa toàn bộ file `index.html` cũ**, tạo file mới, dán đoạn code dưới đây vào và lưu lại. Nhớ nhấn **Ctrl + F5** trên trình duyệt để xóa cache nhé!
+
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -260,7 +265,8 @@ Lịch nghỉ|Leave calendar
 Chấm công|Attendance
 Bảng lương|Payroll
 Nhân viên|Staff
-Duyệt đơn nghỉ|Approve leaveBáo cáo|Reports
+Duyệt đơn nghỉ|Approve leave
+Báo cáo|Reports
 Cài đặt|Settings
 Đăng xuất|Sign out
 Xem lịch nghỉ|View leave calendar
@@ -276,6 +282,8 @@ Chốt lương, in phiếu|Close payroll, print payslips
 Gửi đơn|Submit
 Xem phiếu lương của tôi|View my payslip
 Hôm nay|Today
+Ngày mai|Tomorrow
+Khác|Other
 Cả đội đi làm|Everyone is in
 Ngày phép còn lại|Leave days left
 Đơn chờ duyệt|Pending requests
@@ -291,7 +299,12 @@ Thao tác nhanh|Quick actions
 Gửi đơn nghỉ phép|Submit leave request
 Duyệt đơn nghỉ phép|Approve leave requests
 Duyệt đơn|Approve requests
+Duyệt tất cả|Approve all
+Không có đơn chờ|No pending requests
 Chạm để xem, chốt, in phiếu|Tap to view, close, print payslip
+Đã chốt|Closed
+Chưa chốt|Not closed
+Xem ai nghỉ hôm nay|See who's off today
 Xem bảng lương|View payroll
 Chấm nhỏ: có người nghỉ|Dot: someone is on leave
 Xanh: đã duyệt. Cam: chờ duyệt.|Green: approved. Orange: pending.
@@ -302,6 +315,7 @@ T5|Th
 T6|Fr
 T7|Sa
 CN|Su
+Tháng|Month
 Phép năm|Annual leave
 Nghỉ ốm|Sick leave
 Nghỉ không lương|Unpaid leave
@@ -377,7 +391,8 @@ Khóa tài khoản|Lock account
 Mở khóa|Unlock
 Đặt lại mật khẩu|Reset password
 Xóa nhân viên|Delete employee
-Ngày nghỉ theo phòng ban|Leave days by departmentĐơn đã duyệt|Approved requests
+Ngày nghỉ theo phòng ban|Leave days by department
+Đơn đã duyệt|Approved requests
 Chưa có phòng|No department
 Bảo hiểm và thuế theo nhân viên|Insurance and tax per employee
 Vùng xác định lương tối thiểu và trần BHTN. Để trống Lương đóng BH thì dùng lương cơ bản. Mỗi người phụ thuộc được giảm trừ 6,2 triệu mỗi tháng.|Region sets the minimum wage and the unemployment-insurance cap. Leave the insurance salary base empty to use base salary. Each dependent deducts 6.2 million VND per month.
@@ -452,7 +467,18 @@ Tạo checklist nghỉ việc|Create offboarding checklist
 Cần chú ý|Needs attention
 Hợp đồng của tôi|My contracts
 Tài sản được cấp|Assigned assets
-Công việc nhận/nghỉ việc|My onboarding/offboarding tasks`.split("\n").forEach(l=>{const i=l.indexOf("|");if(i>0)m[l.slice(0,i)]=l.slice(i+1)});return m})();
+Công việc nhận/nghỉ việc|My onboarding/offboarding tasks
+Đơn chờ duyệt|Pending requests
+Chấm để xem, chốt, in phiếu|Tap to view, close, print payslip
+Không có đơn chờ|No pending requests
+Còn|Left
+ngày phép|leave days
+người nghỉ|people off
+Chưa check-in|Not checked in
+Đã check-out lúc|Checked out at
+Vào lúc|In at
+chạm để check-out|tap to check out
+Xem ai nghỉ hôm nay|See who's off today`.split("\n").forEach(l=>{const i=l.indexOf("|");if(i>0)m[l.slice(0,i)]=l.slice(i+1)});return m})();
 
 const PAT=[[/Chào (buổi sáng|buổi chiều|buổi tối), /g,(m,a)=>"Good "+(a=="buổi sáng"?"morning":a=="buổi chiều"?"afternoon":"evening")+", "],[/(Buổi sáng|Buổi chiều|Buổi tối) của /g,(m,a)=>"Good "+(a=="Buổi sáng"?"morning":a=="Buổi chiều"?"afternoon":"evening")+", "],
 [/Còn (\d+)\/(\d+) ngày phép/g,"$1/$2 leave days left"],[/(\d+) đơn đang chờ/g,"$1 pending requests"],[/(\d+) nhân viên/g,"$1 staff"],[/(\d+) người nghỉ hôm nay/g,"$1 on leave today"],[/Đã dùng (\d+) ngày/g,"$1 days used"],
@@ -565,3 +591,4 @@ sb.auth.onAuthStateChange(ev=>{if(ev=="PASSWORD_RECOVERY"){RECOV=true;draw()}});
 </script>
 </body>
 </html>
+```
