@@ -19,7 +19,9 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0}
 body{background:var(--bg);color:var(--tx);font:15px/1.5 var(--font);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;letter-spacing:-.01em}
-h1,h2,h3{letter-spacing:-.02em;font-weight:600}h1{font-size:17px}h2{font-size:17px;margin:0 0 14px}
+h1,h2,h3{letter-spacing:-.02em;font-weight:600}h1{font-size:17px}
+h2{font-size:19px;margin:0 0 16px;display:flex;align-items:center;gap:8px;color:var(--tx);border-bottom:1px solid var(--bd);padding-bottom:12px}
+h2 i{color:var(--ac);font-size:22px}
 a{color:var(--ac);text-decoration:none}a:hover{text-decoration:underline}
 .app{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh;background:var(--bg)}
 aside{background:var(--cd);-webkit-backdrop-filter:saturate(180%) blur(24px);backdrop-filter:saturate(180%) blur(24px);border-right:1px solid var(--bd);padding:20px 14px;display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh}
@@ -30,7 +32,7 @@ aside{background:var(--cd);-webkit-backdrop-filter:saturate(180%) blur(24px);bac
 .ni i{font-size:18px}.ni:hover{background:var(--ac-soft)}.ni.on{background:var(--ac-soft);color:var(--ac)}.ni .ni-i{display:none}.ni i.ti{color:inherit}
 .sl{font-size:11px;color:var(--mu);font-weight:600;padding:16px 12px 6px;text-transform:uppercase;letter-spacing:.06em}
 
-/* --- SEGMENTED CONTROL NỔI BẬT --- */
+/* --- SEGMENTED CONTROL --- */
 .seg{display:flex;background:rgba(120,120,128,.15);border-radius:12px;padding:3px;margin:0 4px 16px;gap:2px;box-shadow:inset 0 1px 3px rgba(0,0,0,.06)}
 .seg button{flex:1;border:0;background:transparent;padding:8px;border-radius:9px;font-weight:600;color:var(--mu);font-size:12px;transition:all .25s cubic-bezier(.2,.8,.2,1);display:flex;align-items:center;justify-content:center;gap:6px}
 .seg button.on{background:var(--cd-solid);color:var(--ac);box-shadow:0 2px 8px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.04);transform:scale(1.02)}
@@ -43,9 +45,10 @@ aside{background:var(--cd);-webkit-backdrop-filter:saturate(180%) blur(24px);bac
 .av{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#0a84ff,#5e5ce6);color:#fff;font-size:13px;font-weight:600;flex:none}
 section{background:var(--bg);min-width:0;display:flex;flex-direction:column}
 
-/* --- TOP BAR (Breadcrumb) --- */
+/* --- TOP BAR NỔI BẬT --- */
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 32px;flex-wrap:wrap;border-bottom:1px solid var(--bd);background:rgba(245,245,247,.72);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);position:sticky;top:0;z-index:10}
-.top>div:last-child>b{font-size:14px;letter-spacing:-.02em;color:var(--mu);text-transform:capitalize}
+.top-title{font-size:20px;font-weight:700;letter-spacing:-.03em;color:var(--tx);display:flex;align-items:center;gap:8px}
+.top-title i{color:var(--ac);font-size:24px}
 
 main{padding:28px 32px 40px;flex:1;width:100%;max-width:1200px;margin:0 auto}
 .cd{background:var(--cd-solid);border:1px solid var(--bd);border-radius:var(--r-lg);padding:22px;margin-bottom:18px;box-shadow:var(--sh-sm);transition:box-shadow .25s ease}
@@ -66,20 +69,20 @@ button.p{background:var(--ac);border-color:transparent;color:#fff;font-weight:50
 button.p:hover:not(:disabled){background:var(--ac2);filter:none}
 textarea{resize:vertical}
 
-/* --- BẢNG (TABLE) ĐIỂM NHẤN --- */
-.tw{overflow-x:auto;border-radius:var(--r);border:1px solid var(--bd);box-shadow:0 2px 10px rgba(0,0,0,.02)}
+/* --- BẢNG (TABLE) NỔI BẬT --- */
+.tw{overflow-x:auto;border-radius:var(--r);border:1px solid var(--bd);box-shadow:0 2px 10px rgba(0,0,0,.02);background:var(--cd-solid)}
 table{width:100%;border-collapse:collapse}
 th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--bd);white-space:nowrap;font-size:13.5px;transition:background .2s}
-th{color:var(--mu);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;background:rgba(120,120,128,.06);position:sticky;top:0;z-index:2;border-bottom:2px solid var(--bd-strong)}
+th{color:var(--mu);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:rgba(120,120,128,.08);position:sticky;top:0;z-index:2;border-bottom:2px solid var(--bd-strong);padding:16px}
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover td{background:var(--ac-soft);cursor:default}
 
 .f{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:14px}.f textarea{grid-column:1/-1;min-height:76px}
-.tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:500;background:color-mix(in srgb,currentColor 14%,transparent)}
-.Duyet{color:var(--ok)}.Tu{color:var(--no)}.Cho{color:var(--wa)}
-.sm{padding:5px 11px;font-size:12px;border-radius:7px}
+.tag{display:inline-flex;align-items:center;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600;background:color-mix(in srgb,currentColor 14%,transparent)}
+.Duyet,.Hired{color:var(--ok);background:rgba(48,177,75,.15)}.Tu{color:var(--no);background:rgba(255,59,48,.15)}.Cho{color:var(--wa);background:rgba(255,149,0,.15)}
+.sm{padding:6px 12px;font-size:12px;border-radius:8px}
 .lg{max-width:400px;margin:10vh auto;padding:36px;text-align:center;border-radius:var(--r-xl);background:var(--cd);-webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);box-shadow:var(--sh-lg)}
-.lg input{width:100%;margin-bottom:10px;padding:12px 14px}.lg h2{font-size:22px;margin-bottom:6px}.lg .p{width:100%;padding:12px;border-radius:12px}
+.lg input{width:100%;margin-bottom:10px;padding:12px 14px}.lg h2{font-size:22px;margin-bottom:6px;border:0;justify-content:center}.lg .p{width:100%;padding:12px;border-radius:12px}
 
 /* --- LỊCH (CALENDAR) ĐIỂM NHẤN --- */
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:16px}
@@ -96,7 +99,7 @@ tbody tr:hover td{background:var(--ac-soft);cursor:default}
 .hero{position:relative;overflow:hidden;border-radius:var(--r-xl);min-height:220px;padding:32px;margin-bottom:22px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;background:linear-gradient(135deg,#0a84ff 0%,#5e5ce6 50%,#bf5af2 100%);color:#fff;box-shadow:0 8px 24px rgba(10,132,255,.28),0 24px 60px rgba(94,92,230,.20)}
 .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35) 0%,rgba(255,255,255,0) 60%);pointer-events:none}
 .hero>*{position:relative;z-index:1}
-.hero h2{font-size:28px;margin:0;color:#fff;font-weight:600;letter-spacing:-.03em}
+.hero h2{font-size:28px;margin:0;color:#fff;font-weight:600;letter-spacing:-.03em;border:0;padding:0}
 .hero p{margin:6px 0 0;opacity:.85;color:#fff;font-size:14px;text-transform:capitalize}
 .hb{display:flex;gap:10px;flex-wrap:wrap}
 .hb button{border-radius:99px;padding:10px 20px;font-weight:500;font-size:14px}
@@ -134,7 +137,7 @@ tbody tr:hover td{background:var(--ac-soft);cursor:default}
 .bd::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}.bd.wa{color:var(--wa)}
 .ac b{font-size:17px;font-weight:600;letter-spacing:-.02em}
 
-/* --- DASHBOARD (BÁO CÁO) PHONG CÁCH TABLEAU / POWER BI --- */
+/* --- DASHBOARD (BÁO CÁO) --- */
 .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
 .dash-card{background:var(--cd-solid);border:1px solid var(--bd);border-radius:var(--r-lg);padding:20px;position:relative;overflow:hidden;box-shadow:var(--sh-sm);transition:transform .2s}
 .dash-card:hover{transform:translateY(-2px);box-shadow:var(--sh)}
@@ -143,8 +146,6 @@ tbody tr:hover td{background:var(--ac-soft);cursor:default}
 .dash-val{font-size:36px;font-weight:700;line-height:1;letter-spacing:-.04em;margin-bottom:8px;background:linear-gradient(135deg,var(--tx),var(--mu));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .dash-sub{font-size:13px;font-weight:500;display:flex;align-items:center;gap:4px}
 .dash-sub.ok{color:var(--ok)}.dash-sub.wa{color:var(--wa)}
-
-/* Biểu đồ cột */
 .chart-bars{display:flex;align-items:flex-end;gap:12px;height:220px;padding-top:20px;position:relative}
 .chart-bars::before{content:"";position:absolute;left:0;right:0;bottom:30px;height:1px;background:var(--bd);z-index:0}
 .bar-col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative;z-index:1;gap:8px}
@@ -153,8 +154,6 @@ tbody tr:hover td{background:var(--ac-soft);cursor:default}
 .bar-fill::after{content:attr(data-val);position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:600;color:var(--tx);opacity:0;transition:opacity .2s}
 .bar-col:hover .bar-fill::after{opacity:1}
 .bar-label{font-size:11px;color:var(--mu);font-weight:500}
-
-/* Thanh tiến trình */
 .progress-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .progress-row>span{width:100px;font-size:13px;font-weight:500;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .progress-row>div{flex:1;background:rgba(120,120,128,.15);border-radius:99px;height:10px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}
@@ -196,7 +195,7 @@ const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+Stri
 let ME=null,P=[],L=[],C=[],A=[],SL=[],T="home",MSG="",CM=new Date(),PM=td.slice(0,7),HOL=new Set(),HD=[],AT=[],RUN=[],FS="all",RECOV=false,ADJ=[],AU=[],NTF=[];
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const em=id=>P.find(e=>e.id==id)||{name:"?"},sal=id=>SL.find(x=>x.user_id==id)||{sal:0,al:0},vnd=n=>Number(n).toLocaleString("vi-VN")+" ₫",hr=()=>ME&&ME.role=="hr",v=i=>document.getElementById(i).value.trim();
-const LT={Duyet:"Đã duyệt",Tu:"Từ chối",Cho:"Chờ duyệt"};
+const LT={Duyet:"Đã duyệt",Tu:"Từ chối",Cho:"Chờ duyệt",Hired:"Đã nhận"};
 function dl(f,o){const a=[],d=new Date(f+"T12:00:00"),e=new Date(o+"T12:00:00");while(d<=e){if(d.getDay()%6&&!HOL.has(iso(d)))a.push(iso(d));d.setDate(d.getDate()+1)}return a}
 const used=id=>L.filter(l=>l.user_id==id&&l.type=="Phép năm"&&l.status!="Tu"&&l.from_date.slice(0,4)==td.slice(0,4)).reduce((s,l)=>s+dl(l.from_date,l.to_date).length,0);
 function go(t){T=t;MSG="";if(["emp","rp","set","ct","rc","tk","as","rv"].includes(t))MODE="mg";else if(["home","cal","att","me"].includes(t))MODE="me";draw()}
@@ -229,22 +228,16 @@ function draw0(){
   if(RECOV){A_.innerHTML=`<div class="cd lg"><div class="logo big">HR</div><h2>Đặt mật khẩu mới</h2><input id="np" type="password" placeholder="Mật khẩu mới"><input id="np2" type="password" placeholder="Nhập lại mật khẩu"><p class="no">${esc(MSG)}</p><button class="p" onclick="setPw()">Lưu mật khẩu</button></div>`;return}
   if(!ME){A_.innerHTML=`<div class="cd lg"><div class="logo big">HR</div><h2>Đăng nhập HR Portal</h2><p class="mu" style="margin:0 0 16px">Cổng nhân sự nội bộ</p><input id="le" placeholder="Email" type="email"><input id="lp" type="password" placeholder="Mật khẩu" onkeydown="if(event.key=='Enter')login()"><p class="no">${esc(MSG)}</p><button class="p" onclick="login()">Đăng nhập</button><p class="mu"><a href="#" onclick="forgot();return false">Quên mật khẩu?</a> · <a href="#" onclick="setLang(LANG=='en'?'vi':'en');return false">${LANG=="en"?"Tiếng Việt":"English"}</a></p></div>`;return}
   
+  const titles = { home:'Tổng quan', cal:'Lịch nghỉ', leave:'Đơn nghỉ phép', att:'Chấm công', pay:'Bảng lương', me:'Hồ sơ', emp:'Nhân viên', rp:'Báo cáo', set:'Cài đặt', ct:'Hợp đồng', rc:'Tuyển dụng', tk:'Nhận/Nghỉ việc', as:'Tài sản', rv:'Đánh giá' };
+  const icons = { home:'ti-layout-dashboard', cal:'ti-calendar-event', leave:'ti-file-text', att:'ti-clock', pay:'ti-cash', me:'ti-user', emp:'ti-users', rp:'ti-chart-bar', set:'ti-settings', ct:'ti-file-invoice', rc:'ti-user-search', tk:'ti-list-check', as:'ti-device-laptop', rv:'ti-star' };
+  
   A_.innerHTML=`<div class="app"><aside><div class="brand"><span class="logo">HR</span><b>HR Portal</b></div>${side()}<div class="ub"><span class="av">${esc(ME.name.trim().charAt(0).toUpperCase())}</span><div><b>${esc(ME.name)}</b><div class="mu">${hr()?"Quản lý":"Nhân viên"}</div></div><button class="gb" onclick="logout()" title="Đăng xuất"><i class="ti ti-logout"></i></button></div></aside><section>
   
   <div class="top">
-    <div style="display:flex;align-items:center;gap:12px">
-      <span class="logo" style="width:28px;height:28px;font-size:11px">HR</span>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--mu)">
-        <span>HR Portal</span>
-        <i class="ti ti-chevron-right" style="font-size:12px;opacity:0.5"></i>
-        <span style="color:var(--tx);text-transform:capitalize">
-          ${T==='home'?'Tổng quan':T==='emp'?'Nhân viên':T==='pay'?'Bảng lương':T==='leave'?'Nghỉ phép':T==='cal'?'Lịch':T==='rp'?'Báo cáo':T==='att'?'Chấm công':T==='me'?'Hồ sơ':T==='set'?'Cài đặt':'Chi tiết'}
-        </span>
-      </div>
-    </div>
+    <div class="top-title"><i class="ti ${icons[T]||'ti-layout-dashboard'}"></i> ${titles[T]||'Chi tiết'}</div>
     <div style="display:flex;gap:10px;align-items:center">
-      <button class="bell-btn" onclick="toggleNotif()" style="width:32px;height:32px;font-size:16px"><i class="ti ti-bell"></i>${NTF.filter(n=>!n.is_read).length>0?`<span class="bell-dot" style="top:-1px;right:-1px;width:14px;height:14px;font-size:9px">${NTF.filter(n=>!n.is_read).length}</span>`:''}</button>
-      <button class="lang" onclick="setLang(LANG=='en'?'vi':'en')" style="padding:6px 12px;font-size:12px;border-radius:8px"><i class="ti ti-world"></i> ${LANG=="en"?"EN":"VI"}</button>
+      <button class="bell-btn" onclick="toggleNotif()" style="width:34px;height:34px;font-size:18px"><i class="ti ti-bell"></i>${NTF.filter(n=>!n.is_read).length>0?`<span class="bell-dot" style="top:-2px;right:-2px;width:16px;height:16px;font-size:10px">${NTF.filter(n=>!n.is_read).length}</span>`:''}</button>
+      <button class="lang" onclick="setLang(LANG=='en'?'vi':'en')" style="padding:7px 14px;font-size:13px;border-radius:99px"><i class="ti ti-world"></i> ${LANG=="en"?"EN":"VI"}</button>
     </div>
   </div>
   
@@ -260,16 +253,16 @@ const V={
 home(){const p=L.filter(l=>l.status=="Cho"&&(hr()||l.user_id==ME.id)).length,o=C.filter(l=>l.status=="Duyet"&&dl(l.from_date,l.to_date).includes(td)).map(l=>l.name),u=used(ME.id),rem=QUOTA-u,hh=new Date().getHours(),g=hh<11?"Chào buổi sáng":hh<18?"Chào buổi chiều":"Chào buổi tối",fn=ME.name.trim().split(" ").pop(),cc=2*Math.PI*34;
 return`<div class="hero"><div class="hh"><div><h2>${g}, ${esc(fn)}</h2><p>${new Date().toLocaleDateString(LOC(),{weekday:"long",day:"numeric",month:"numeric",year:"numeric"})}</p></div><div class="clk" style="text-align:right"><b id="clk"></b><div id="weather" class="mu" style="color:rgba(255,255,255,.9);font-size:14px;margin-top:4px">📍 TP.HCM · Đang tải...</div></div></div><div class="hb"><button class="wh" onclick="go('leave')"><i class="ti ti-plane-departure"></i> Xin nghỉ phép</button><button class="gl" onclick="go('cal')"><i class="ti ti-calendar-event"></i> Xem lịch nghỉ</button></div></div>
 ${oneTap()}${cards()}<div class="row"><div><div class="g"><div class="cd st rg"><svg width="84" height="84" viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="var(--bd)" stroke-width="8"/><circle cx="42" cy="42" r="34" fill="none" stroke="var(--ac)" stroke-width="8" stroke-linecap="round" stroke-dasharray="${cc}" stroke-dashoffset="${cc*(1-rem/QUOTA)}" transform="rotate(-90 42 42)"/><text x="42" y="47" text-anchor="middle" font-size="15" font-weight="600" fill="currentColor">${rem}/${QUOTA}</text></svg><div><b style="font-size:15px">Ngày phép còn lại</b><div class="mu">Đã dùng ${u} ngày</div></div></div><div class="cd st"><span class="mu">${hr()?"Đơn chờ duyệt":"Đơn của tôi chờ duyệt"}</span><b>${p}</b><span class="mu">${hr()?"Cần xử lý":"Đang chờ quản lý"}</span></div><div class="cd st"><span class="mu">Nghỉ hôm nay</span><b>${o.length}</b><span class="mu">${o.length?esc(o.join(", ")):"Cả đội đi làm"}</span></div></div>
-<div class="cd"><h2>Tin thông báo</h2>${A.map(a=>`<div class="an"><i class="ti ti-speakerphone"></i><div><b>${esc(a.title)}</b><div class="mu">${a.created_at.slice(0,10)}</div></div>${hr()?`<button class="sm" onclick="delAnn(${a.id})">Xóa</button>`:""}</div>`).join("")||`<p class="mu">Chưa có thông báo</p>`}${hr()?`<div class="f"><input id="at" placeholder="Nội dung thông báo"><button class="p" onclick="addAnn()">Đăng</button></div>`:""}</div></div>
-<div>${mini()}${alerts()}<div class="cd"><h2>Thao tác nhanh</h2><button class="qa" onclick="go('leave')"><i class="ti ti-file-plus"></i><span>${hr()?"Duyệt đơn nghỉ phép":"Gửi đơn nghỉ phép"}</span><i class="ti ti-chevron-right"></i></button><button class="qa" onclick="go('cal')"><i class="ti ti-calendar-event"></i><span>Xem lịch nghỉ</span><i class="ti ti-chevron-right"></i></button><button class="qa" onclick="go('pay')"><i class="ti ti-cash"></i><span>Xem bảng lương</span><i class="ti ti-chevron-right"></i></button></div></div></div>`},
+<div class="cd"><h2><i class="ti ti-speakerphone"></i> Tin thông báo</h2>${A.map(a=>`<div class="an"><i class="ti ti-speakerphone"></i><div><b>${esc(a.title)}</b><div class="mu">${a.created_at.slice(0,10)}</div></div>${hr()?`<button class="sm" onclick="delAnn(${a.id})">Xóa</button>`:""}</div>`).join("")||`<p class="mu">Chưa có thông báo</p>`}${hr()?`<div class="f"><input id="at" placeholder="Nội dung thông báo"><button class="p" onclick="addAnn()">Đăng</button></div>`:""}</div></div>
+<div>${mini()}${alerts()}<div class="cd"><h2><i class="ti ti-bolt"></i> Thao tác nhanh</h2><button class="qa" onclick="go('leave')"><i class="ti ti-file-plus"></i><span>${hr()?"Duyệt đơn nghỉ phép":"Gửi đơn nghỉ phép"}</span><i class="ti ti-chevron-right"></i></button><button class="qa" onclick="go('cal')"><i class="ti ti-calendar-event"></i><span>Xem lịch nghỉ</span><i class="ti ti-chevron-right"></i></button><button class="qa" onclick="go('pay')"><i class="ti ti-cash"></i><span>Xem bảng lương</span><i class="ti ti-chevron-right"></i></button></div></div></div>`},
 cal(){const y=CM.getFullYear(),m=CM.getMonth(),ev={};C.forEach(l=>dl(l.from_date,l.to_date).forEach(d=>(ev[d]=ev[d]||[]).push({n:l.name.split(" ").pop(),s:l.status})));
 const first=(new Date(y,m,1).getDay()+6)%7,n=new Date(y,m+1,0).getDate();let c="";for(let i=0;i<first;i++)c+="<div class='x'></div>";
 for(let d=1;d<=n;d++){const k=iso(new Date(y,m,d));c+=`<div class="${k==td?"t":""}"><b>${d}</b>${(ev[k]||[]).map(e=>`<span class="ev ${e.s}">${esc(e.n)}</span>`).join("")}</div>`}
-return`<div class="cd"><h2><button class="sm" onclick="mv(-1)">‹</button> Tháng ${m+1}/${y} <button class="sm" onclick="mv(1)">›</button></h2><div class="cal">${["T2","T3","T4","T5","T6","T7","CN"].map(x=>`<div class="h">${x}</div>`).join("")}${c}</div><p class="mu">Xanh: đã duyệt. Cam: chờ duyệt.</p></div>`},
-leave(){return`<div class="cd"><h2>Xin nghỉ phép</h2><p class="mu">Phép năm còn lại: ${QUOTA-used(ME.id)}/${QUOTA} ngày (không tính thứ Bảy, Chủ Nhật)</p><div class="f"><select id="lt"><option>Phép năm</option><option>Nghỉ ốm</option><option>Nghỉ không lương</option><option>Thai sản</option><option>Cưới hỏi</option><option>Hiếu hỉ</option></select><input id="lf" type="date" value="${td}"><input id="lo" type="date" value="${td}"><textarea id="lr" placeholder="Lý do"></textarea></div><button class="p" onclick="addLv()">Gửi đơn</button></div><div class="cd"><h2>${hr()?"Tất cả đơn":"Đơn của tôi"}</h2><select style="margin-bottom:10px" onchange="FS=this.value;draw()">${[["all","Tất cả trạng thái"],["Cho","Chờ duyệt"],["Duyet","Đã duyệt"],["Tu","Từ chối"]].map(x=>`<option value="${x[0]}" ${FS==x[0]?"selected":""}>${x[1]}</option>`).join("")}</select><div class="tw"><table><thead><tr><th>Nhân viên</th><th>Loại</th><th>Từ</th><th>Đến</th><th>Số ngày</th><th>Lý do</th><th>Trạng thái</th><th></th></tr></thead><tbody>${L.filter(l=>FS=="all"||l.status==FS).map(l=>`<tr><td>${esc(em(l.user_id).name)}</td><td>${esc(l.type)}</td><td>${l.from_date}</td><td>${l.to_date}</td><td>${dl(l.from_date,l.to_date).length}</td><td>${esc(l.reason)}${l.reject_reason?` <span class="no">(Từ chối: ${esc(l.reject_reason)})</span>`:""}</td><td><span class="tag ${l.status}">${LT[l.status]}</span></td><td>${l.status=="Cho"?(hr()?`<button class="sm" onclick="dec(${l.id},'Duyet')">Duyệt</button> <button class="sm" onclick="dec(${l.id},'Tu')">Từ chối</button>`:`<button class="sm" onclick="cancel(${l.id})">Hủy</button>`):""}${hr()?` <button class="sm" onclick="if(confirm('Xóa đơn này?'))cancel(${l.id})">Xóa</button>`:""}</td></tr>`).join("")||`<tr><td colspan="8" class="mu">Chưa có đơn nào</td></tr>`}</tbody></table></div></div>`},
+return`<div class="cd"><h2><i class="ti ti-calendar-month"></i> Lịch nghỉ tháng ${m+1}/${y}</h2><div style="display:flex;gap:10px;margin-bottom:16px"><button class="sm" onclick="mv(-1)"><i class="ti ti-chevron-left"></i> Tháng trước</button><button class="sm" onclick="mv(1)">Tháng sau <i class="ti ti-chevron-right"></i></button></div><div class="cal">${["T2","T3","T4","T5","T6","T7","CN"].map(x=>`<div class="h">${x}</div>`).join("")}${c}</div><p class="mu" style="margin-top:12px">Màu xanh: đã duyệt. Màu cam: chờ duyệt.</p></div>`},
+leave(){return`<div class="cd"><h2><i class="ti ti-plane-departure"></i> Xin nghỉ phép</h2><p class="mu">Phép năm còn lại: ${QUOTA-used(ME.id)}/${QUOTA} ngày (không tính thứ Bảy, Chủ Nhật)</p><div class="f"><select id="lt"><option>Phép năm</option><option>Nghỉ ốm</option><option>Nghỉ không lương</option><option>Thai sản</option><option>Cưới hỏi</option><option>Hiếu hỉ</option></select><input id="lf" type="date" value="${td}"><input id="lo" type="date" value="${td}"><textarea id="lr" placeholder="Lý do"></textarea></div><button class="p" onclick="addLv()">Gửi đơn</button></div><div class="cd"><h2><i class="ti ti-list"></i> ${hr()?"Tất cả đơn":"Đơn của tôi"}</h2><select style="margin-bottom:16px" onchange="FS=this.value;draw()">${[["all","Tất cả trạng thái"],["Cho","Chờ duyệt"],["Duyet","Đã duyệt"],["Tu","Từ chối"]].map(x=>`<option value="${x[0]}" ${FS==x[0]?"selected":""}>${x[1]}</option>`).join("")}</select><div class="tw"><table><thead><tr><th>Nhân viên</th><th>Loại</th><th>Từ</th><th>Đến</th><th>Số ngày</th><th>Lý do</th><th>Trạng thái</th><th></th></tr></thead><tbody>${L.filter(l=>FS=="all"||l.status==FS).map(l=>`<tr><td>${esc(em(l.user_id).name)}</td><td>${esc(l.type)}</td><td>${l.from_date}</td><td>${l.to_date}</td><td>${dl(l.from_date,l.to_date).length}</td><td>${esc(l.reason)}${l.reject_reason?` <span class="no">(Từ chối: ${esc(l.reject_reason)})</span>`:""}</td><td><span class="tag ${l.status}">${LT[l.status]}</span></td><td>${l.status=="Cho"?(hr()?`<button class="sm" onclick="dec(${l.id},'Duyet')">Duyệt</button> <button class="sm" onclick="dec(${l.id},'Tu')">Từ chối</button>`:`<button class="sm" onclick="cancel(${l.id})">Hủy</button>`):""}${hr()?` <button class="sm" onclick="if(confirm('Xóa đơn này?'))cancel(${l.id})">Xóa</button>`:""}</td></tr>`).join("")||`<tr><td colspan="8" class="mu">Chưa có đơn nào</td></tr>`}</tbody></table></div></div>`},
 pay(){const rows=payRows(),locked=RUN.some(x=>x.month==PM),ed=hr()&&!locked,ip=(r,f)=>ed?`<input style="width:100px" type="number" value="${r[f]||0}" onchange="adj('${r.id}','${f}',this.value)">`:vnd(r[f]||0),H=hr();
-return`<div class="cd"><h2>Bảng lương</h2><div class="f"><input type="month" value="${PM}" onchange="PM=this.value;draw()"></div>${locked?`<p class="mu"><i class="ti ti-lock"></i> Tháng này đã chốt, số liệu không đổi khi sửa lương hay thông số.</p>`:`<p class="mu">Chưa chốt: tính theo thông số hiện tại.${H?" Nhập thưởng, tăng ca, phạt ở các ô bên dưới.":""}</p>`}<details class="mu" style="margin-bottom:12px"><summary style="cursor:pointer;font-weight:500">Quy định đang áp dụng (tra cứu tháng 10/2026)</summary><div style="margin-top:8px;line-height:1.6">Người lao động đóng BHXH 8% + BHYT 1,5% + BHTN 1% = 10,5%. Doanh nghiệp đóng BHXH 17,5% + BHYT 3% + BHTN 1% = 21,5%.<br>Trần lương đóng BHXH, BHYT: 20 lần lương cơ sở (2.340.000 đ trước 01/07/2026, 2.530.000 đ từ 01/07/2026 theo Nghị định 161/2026/NĐ-CP, tức 46,8 triệu và 50,6 triệu). Trần BHTN: 20 lần lương tối thiểu vùng (Nghị định 293/2025/NĐ-CP: vùng I 5.310.000, II 4.730.000, III 4.140.000, IV 3.700.000). Lương đóng thấp nhất bằng lương tối thiểu vùng.<br>Thuế TNCN: giảm trừ bản thân 15,5 triệu, mỗi người phụ thuộc 6,2 triệu mỗi tháng. Biểu 5 bậc trên thu nhập tính thuế mỗi tháng: đến 10 triệu 5%, trên 10 đến 30 triệu 10%, trên 30 đến 60 triệu 20%, trên 60 đến 100 triệu 30%, trên 100 triệu 35%.<br><b>Chưa xử lý:</b> phụ cấp được miễn thuế (ăn trưa...), phần chênh lệch tiền làm thêm giờ được miễn thuế, thu nhập từ nơi khác, giảm trừ từ thiện. Phạt được trừ sau thuế. Công thức áp dụng cho kỳ lương từ 01/2026. Đây là công cụ tham khảo, hãy đối chiếu với kế toán hoặc cơ quan thuế.</div></details><div class="f"><button onclick="xlsx()"><i class="ti ti-file-spreadsheet"></i> Xuất Excel</button><button onclick="pdf()"><i class="ti ti-file-type-pdf"></i> Xuất PDF</button><button onclick="csv()"><i class="ti ti-download"></i> Xuất CSV</button>${H&&!locked?`<button onclick="tpl()"><i class="ti ti-file-download"></i> Tải file mẫu</button><button onclick="document.getElementById('xl').click()"><i class="ti ti-file-upload"></i> Nhập Excel</button><input type="file" id="xl" accept=".xlsx,.xls,.csv" style="display:none" onchange="importXlsx(this)">`:""}${H&&!locked?`<button class="p" onclick="lockPay()">Chốt lương tháng</button>`:""}${H&&locked?`<button onclick="unlockPay()">Mở chốt</button>`:""}</div><div class="tw"><table><thead><tr><th>Nhân viên</th><th>Lương CB</th><th>Phụ cấp</th><th>Thưởng</th><th>Tăng ca</th><th>Phạt</th><th>Nghỉ KL</th><th>BHXH 8%</th><th>BHYT 1,5%</th><th>BHTN 1%</th><th>Thu nhập tính thuế</th><th>Thuế TNCN</th><th>Thực nhận</th>${H?"<th>DN đóng BH</th>":""}<th></th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${vnd(r.sal)}</td><td>${vnd(r.al)}</td><td>${ip(r,"bonus")}</td><td>${ip(r,"ot")}</td><td>${ip(r,"penalty")}</td><td>-${vnd(r.dd)} (${r.u} ngày)</td><td>-${vnd(r.xh)}</td><td>-${vnd(r.yt)}</td><td>-${vnd(r.tn)}</td><td>${vnd(r.ttax)}</td><td>-${vnd(r.tax)}</td><td><b>${vnd(r.net)}</b></td>${H?`<td>${vnd(r.er)}</td>`:""}<td><button class="sm" onclick="slip('${r.id}')">In phiếu</button></td></tr>`).join("")||`<tr><td colspan="15" class="mu">Chưa có dữ liệu</td></tr>`}</tbody></table></div></div>`},
-emp(){return`<div class="cd"><h2>Danh sách nhân viên</h2><details style="margin-bottom:12px"><summary style="cursor:pointer;font-weight:500">Thêm nhân viên mới</summary><div class="f" style="margin-top:10px"><input id="s1" type="email" placeholder="Email"><input id="s2" placeholder="Mật khẩu (từ 6 ký tự)"><input id="s3" placeholder="Họ tên"><input id="s4" placeholder="Phòng ban"><input id="s5" placeholder="Chức vụ"><input id="s6" type="number" placeholder="Lương cơ bản"></div><button class="p" onclick="addStaff()">Tạo tài khoản</button></details><div class="tw"><table><thead><tr><th>Họ tên</th><th>Email</th><th>Phòng ban</th><th>Chức vụ</th><th>Vai trò (Phân quyền)</th><th>Lương</th><th>Phụ cấp</th><th>Ngày vào</th><th>SĐT</th><th>Phép tồn</th><th></th></tr></thead><tbody>${P.map(e=>{const s=sal(e.id);return`<tr><td><input style="width:150px" value="${esc(e.name)}" onchange="upd('profiles','id','${e.id}','name',this.value)"></td><td>${esc(e.email)}</td><td><input style="width:110px" value="${esc(e.dept)}" onchange="upd('profiles','id','${e.id}','dept',this.value)"></td><td><input style="width:130px" value="${esc(e.pos)}" onchange="upd('profiles','id','${e.id}','pos',this.value)"></td><td><select style="font-weight:600;color:${e.role=='hr'?'var(--ac)':'var(--tx)'}" ${e.id==ME.id?"disabled":""} onchange="upd('profiles','id','${e.id}','role',this.value)"><option value="nv" ${e.role=="nv"?"selected":""}>Nhân viên</option><option value="hr" ${e.role=="hr"?"selected":""}>Quản lý (Admin)</option></select></td><td><input style="width:120px" type="number" value="${s.sal}" onchange="upd('salaries','user_id','${e.id}','sal',+this.value||0)"></td><td><input style="width:110px" type="number" value="${s.al}" onchange="upd('salaries','user_id','${e.id}','al',+this.value||0)"></td><td><input type="date" value="${e.start_date||""}" onchange="upd('profiles','id','${e.id}','start_date',this.value||null)"></td><td><input style="width:120px" value="${esc(e.phone)}" onchange="upd('profiles','id','${e.id}','phone',this.value)"></td><td><input style="width:80px" type="number" value="${e.carry||0}" onchange="upd('profiles','id','${e.id}','carry',+this.value||0)"></td><td>${e.id==ME.id?"":`<select onchange="admAct('${e.id}',this.value)"><option value="">Thao tác...</option><option value="ban">Khóa tài khoản</option><option value="unban">Mở khóa</option><option value="reset">Đặt lại mật khẩu</option><option value="delete">Xóa nhân viên</option></select>`}</td></tr>`}).join("")}</tbody></table></div></div>`}};
+return`<div class="cd"><h2><i class="ti ti-cash"></i> Bảng lương</h2><div class="f"><input type="month" value="${PM}" onchange="PM=this.value;draw()"></div>${locked?`<p class="mu"><i class="ti ti-lock"></i> Tháng này đã chốt, số liệu không đổi khi sửa lương hay thông số.</p>`:`<p class="mu">Chưa chốt: tính theo thông số hiện tại.${H?" Nhập thưởng, tăng ca, phạt ở các ô bên dưới.":""}</p>`}<details class="mu" style="margin-bottom:16px"><summary style="cursor:pointer;font-weight:500">Quy định đang áp dụng (tra cứu tháng 10/2026)</summary><div style="margin-top:8px;line-height:1.6">Người lao động đóng BHXH 8% + BHYT 1,5% + BHTN 1% = 10,5%. Doanh nghiệp đóng BHXH 17,5% + BHYT 3% + BHTN 1% = 21,5%.<br>Trần lương đóng BHXH, BHYT: 20 lần lương cơ sở (2.340.000 đ trước 01/07/2026, 2.530.000 đ từ 01/07/2026 theo Nghị định 161/2026/NĐ-CP, tức 46,8 triệu và 50,6 triệu). Trần BHTN: 20 lần lương tối thiểu vùng (Nghị định 293/2025/NĐ-CP: vùng I 5.310.000, II 4.730.000, III 4.140.000, IV 3.700.000). Lương đóng thấp nhất bằng lương tối thiểu vùng.<br>Thuế TNCN: giảm trừ bản thân 15,5 triệu, mỗi người phụ thuộc 6,2 triệu mỗi tháng. Biểu 5 bậc trên thu nhập tính thuế mỗi tháng: đến 10 triệu 5%, trên 10 đến 30 triệu 10%, trên 30 đến 60 triệu 20%, trên 60 đến 100 triệu 30%, trên 100 triệu 35%.<br><b>Chưa xử lý:</b> phụ cấp được miễn thuế (ăn trưa...), phần chênh lệch tiền làm thêm giờ được miễn thuế, thu nhập từ nơi khác, giảm trừ từ thiện. Phạt được trừ sau thuế. Công thức áp dụng cho kỳ lương từ 01/2026. Đây là công cụ tham khảo, hãy đối chiếu với kế toán hoặc cơ quan thuế.</div></details><div class="f"><button onclick="xlsx()"><i class="ti ti-file-spreadsheet"></i> Xuất Excel</button><button onclick="pdf()"><i class="ti ti-file-type-pdf"></i> Xuất PDF</button><button onclick="csv()"><i class="ti ti-download"></i> Xuất CSV</button>${H&&!locked?`<button onclick="tpl()"><i class="ti ti-file-download"></i> Tải file mẫu</button><button onclick="document.getElementById('xl').click()"><i class="ti ti-file-upload"></i> Nhập Excel</button><input type="file" id="xl" accept=".xlsx,.xls,.csv" style="display:none" onchange="importXlsx(this)">`:""}${H&&!locked?`<button class="p" onclick="lockPay()">Chốt lương tháng</button>`:""}${H&&locked?`<button onclick="unlockPay()">Mở chốt</button>`:""}</div><div class="tw"><table><thead><tr><th>Nhân viên</th><th>Lương CB</th><th>Phụ cấp</th><th>Thưởng</th><th>Tăng ca</th><th>Phạt</th><th>Nghỉ KL</th><th>BHXH 8%</th><th>BHYT 1,5%</th><th>BHTN 1%</th><th>Thu nhập tính thuế</th><th>Thuế TNCN</th><th>Thực nhận</th>${H?"<th>DN đóng BH</th>":""}<th></th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${vnd(r.sal)}</td><td>${vnd(r.al)}</td><td>${ip(r,"bonus")}</td><td>${ip(r,"ot")}</td><td>${ip(r,"penalty")}</td><td>-${vnd(r.dd)} (${r.u} ngày)</td><td>-${vnd(r.xh)}</td><td>-${vnd(r.yt)}</td><td>-${vnd(r.tn)}</td><td>${vnd(r.ttax)}</td><td>-${vnd(r.tax)}</td><td><b>${vnd(r.net)}</b></td>${H?`<td>${vnd(r.er)}</td>`:""}<td><button class="sm" onclick="slip('${r.id}')">In phiếu</button></td></tr>`).join("")||`<tr><td colspan="15" class="mu">Chưa có dữ liệu</td></tr>`}</tbody></table></div></div>`},
+emp(){return`<div class="cd"><h2><i class="ti ti-users"></i> Danh sách nhân viên</h2><details style="margin-bottom:16px"><summary style="cursor:pointer;font-weight:500;color:var(--ac)">Thêm nhân viên mới</summary><div class="f" style="margin-top:10px"><input id="s1" type="email" placeholder="Email"><input id="s2" placeholder="Mật khẩu (từ 6 ký tự)"><input id="s3" placeholder="Họ tên"><input id="s4" placeholder="Phòng ban"><input id="s5" placeholder="Chức vụ"><input id="s6" type="number" placeholder="Lương cơ bản"></div><button class="p" onclick="addStaff()">Tạo tài khoản</button></details><div class="tw"><table><thead><tr><th>Họ tên</th><th>Email</th><th>Phòng ban</th><th>Chức vụ</th><th>Vai trò (Phân quyền)</th><th>Lương</th><th>Phụ cấp</th><th>Ngày vào</th><th>SĐT</th><th>Phép tồn</th><th></th></tr></thead><tbody>${P.map(e=>{const s=sal(e.id);return`<tr><td><input style="width:150px" value="${esc(e.name)}" onchange="upd('profiles','id','${e.id}','name',this.value)"></td><td>${esc(e.email)}</td><td><input style="width:110px" value="${esc(e.dept)}" onchange="upd('profiles','id','${e.id}','dept',this.value)"></td><td><input style="width:130px" value="${esc(e.pos)}" onchange="upd('profiles','id','${e.id}','pos',this.value)"></td><td><select style="font-weight:600;color:${e.role=='hr'?'var(--ac)':'var(--tx)'}" ${e.id==ME.id?"disabled":""} onchange="upd('profiles','id','${e.id}','role',this.value)"><option value="nv" ${e.role=="nv"?"selected":""}>Nhân viên</option><option value="hr" ${e.role=="hr"?"selected":""}>Quản lý (Admin)</option></select></td><td><input style="width:120px" type="number" value="${s.sal}" onchange="upd('salaries','user_id','${e.id}','sal',+this.value||0)"></td><td><input style="width:110px" type="number" value="${s.al}" onchange="upd('salaries','user_id','${e.id}','al',+this.value||0)"></td><td><input type="date" value="${e.start_date||""}" onchange="upd('profiles','id','${e.id}','start_date',this.value||null)"></td><td><input style="width:120px" value="${esc(e.phone)}" onchange="upd('profiles','id','${e.id}','phone',this.value)"></td><td><input style="width:80px" type="number" value="${e.carry||0}" onchange="upd('profiles','id','${e.id}','carry',+this.value||0)"></td><td>${e.id==ME.id?"":`<select onchange="admAct('${e.id}',this.value)"><option value="">Thao tác...</option><option value="ban">Khóa tài khoản</option><option value="unban">Mở khóa</option><option value="reset">Đặt lại mật khẩu</option><option value="delete">Xóa nhân viên</option></select>`}</td></tr>`}).join("")}</tbody></table></div></div>`}};
 
 const TC={home:"#2f8fe8",cal:"#22b8cf",leave:"#5bc0f8",att:"#2f8fe8",pay:"#2b6fd6",me:"#6aaee8",emp:"#38bdf8",rp:"#2b8fb8",set:"#7a90ab",ct:"#2f8fe8",rc:"#38bdf8",tk:"#22b8cf",as:"#5bc0f8",rv:"#2b6fd6"};
 function cards(){const r=AT.find(a=>a.user_id==ME.id&&a.day==td)||{},f=t=>new Date(t).toTimeString().slice(0,5),pend=L.filter(l=>l.status=="Cho"&&(hr()||l.user_id==ME.id)).length,off=C.filter(l=>l.status=="Duyet"&&dl(l.from_date,l.to_date).includes(td)).length;
@@ -362,6 +355,7 @@ Xem ai nghỉ hôm nay|See who's off today
 Xem bảng lương|View payroll
 Chấm nhỏ: có người nghỉ|Dot: someone is on leave
 Xanh: đã duyệt. Cam: chờ duyệt.|Green: approved. Orange: pending.
+Màu xanh: đã duyệt. Màu cam: chờ duyệt.|Green: approved. Orange: pending.
 T2|Mo
 T3|Tu
 T4|We
@@ -369,6 +363,9 @@ T5|Th
 T6|Fr
 T7|Sa
 CN|Su
+Tháng trước|Last month
+Tháng sau|Next month
+Lịch nghỉ tháng|Leave calendar month
 Tháng|Month
 Phép năm|Annual leave
 Nghỉ ốm|Sick leave
@@ -383,6 +380,7 @@ Tất cả trạng thái|All statuses
 Chờ duyệt|Pending
 Đã duyệt|Approved
 Từ chối|Declined
+Đã nhận|Hired
 Loại|Type
 Từ|From
 Đến|To
@@ -529,7 +527,17 @@ Tỷ lệ nghỉ phép|Leave rate
 Đơn từ|Requests
 Hiệu suất|Performance
 Theo tháng|By Month
-Tỷ trọng|Proportion`.split("\n").forEach(l=>{const i=l.indexOf("|");if(i>0)m[l.slice(0,i)]=l.slice(i+1)});return m})();
+Tỷ trọng|Proportion
+Đã được nhận|Hired
+Tuyển dụng thành công|Successfully Hired
+Tạo hồ sơ nhân viên|Create employee profile
+Nhập lương cơ bản|Enter base salary
+Chức danh|Job title
+Đã chuyển sang nhân viên|Moved to employees
+Lỗi tạo tài khoản|Error creating account
+Mật khẩu cấp 1|Initial password
+Đã sao chép|Copied
+Nhân viên mới đã được thêm vào hệ thống|New employee added to system`.split("\n").forEach(l=>{const i=l.indexOf("|");if(i>0)m[l.slice(0,i)]=l.slice(i+1)});return m})();
 
 const PAT=[[/Chào (buổi sáng|buổi chiều|buổi tối), /g,(m,a)=>"Good "+(a=="buổi sáng"?"morning":a=="buổi chiều"?"afternoon":"evening")+", "],[/(Buổi sáng|Buổi chiều|Buổi tối) của /g,(m,a)=>"Good "+(a=="Buổi sáng"?"morning":a=="Buổi chiều"?"afternoon":"evening")+", "],
 [/Còn (\d+)\/(\d+) ngày phép/g,"$1/$2 leave days left"],[/(\d+) đơn đang chờ/g,"$1 pending requests"],[/(\d+) nhân viên/g,"$1 staff"],[/(\d+) người nghỉ hôm nay/g,"$1 on leave today"],[/Đã dùng (\d+) ngày/g,"$1 days used"],
@@ -573,20 +581,61 @@ candidates:{t:"Tuyển dụng",tb:"candidates",top:()=>`<p>${STG.map(x=>`<span c
 tasks:{t:"Nhận/nghỉ việc",tb:"tasks",top:()=>`<div class="f"><select id="tk_emp"><option value="">Chọn nhân viên...</option>${empOpts()}</select><button onclick="tmpl('Nhận việc')">Tạo checklist nhận việc</button><button onclick="tmpl('Nghỉ việc')">Tạo checklist nghỉ việc</button></div>`,cols:[["user_id","Nhân viên","emp"],["kind","Loại","sel",["Nhận việc","Nghỉ việc"]],["title","Công việc","text"],["done","Hoàn thành","bool"]]},
 assets:{t:"Tài sản",tb:"assets",cols:[["name","Tài sản","text"],["code","Mã tài sản","text"],["user_id","Người sử dụng","emp?"],["date","Ngày cấp","date"],["status","Tình trạng","sel",["Đang sử dụng","Trong kho","Hỏng","Đã thu hồi"],1]]},
 reviews:{t:"Đánh giá hiệu suất",tb:"reviews",cols:[["user_id","Nhân viên","emp"],["period","Kỳ đánh giá","text"],["score","Điểm (1-5)","num"],["note","Nhận xét","text"]]}};
-function crud(k){const c=CFG[k],rows=DB[c.tb]||[],isE=ty=>ty.startsWith("emp");
-const inp=([f,l,ty,o])=>isE(ty)?`<select id="c_${f}"><option value="">${l}</option>${empOpts()}</select>`:ty=="sel"?`<select id="c_${f}">${o.map(x=>`<option>${x}</option>`).join("")}</select>`:ty=="bool"?"":`<input id="c_${f}" type="${ty=="date"?"date":ty=="num"?"number":"text"}" placeholder="${l}">`;
-const cell=(r,[f,l,ty,o,ed])=>isE(ty)?(r[f]?esc(em(r[f]).name):""):ty=="sel"&&ed?`<select onchange="cupd('${c.tb}',${r.id},'${f}',this.value)">${o.map(x=>`<option ${r[f]==x?"selected":""}>${x}</option>`).join("")}</select>`:ty=="bool"?`<input type="checkbox" ${r[f]?"checked":""} onchange="cupd('${c.tb}',${r.id},'${f}',this.checked)">`:esc(r[f]);
-return`<div class="cd"><h2>${c.t}</h2>${c.top?c.top():""}<div class="f">${c.cols.map(inp).join("")}</div><button class="p" onclick="cadd('${k}')">Thêm</button></div><div class="cd"><div class="tw"><table><thead><tr>${c.cols.map(x=>`<th>${x[1]}</th>`).join("")}<th></th></tr></thead><tbody>${rows.map(r=>`<tr>${c.cols.map(x=>`<td>${cell(r,x)}</td>`).join("")}<td><button class="sm" onclick="cdel('${c.tb}',${r.id})">Xóa</button></td></tr>`).join("")||`<tr><td colspan="9" class="mu">Chưa có dữ liệu</td></tr>`}</tbody></table></div></div>`}
+
+function crud(k){
+  const c=CFG[k],rows=DB[c.tb]||[],isE=ty=>ty.startsWith("emp");
+  const inp=([f,l,ty,o])=>isE(ty)?`<select id="c_${f}"><option value="">${l}</option>${empOpts()}</select>`:ty=="sel"?`<select id="c_${f}">${o.map(x=>`<option>${x}</option>`).join("")}</select>`:ty=="bool"?"":`<input id="c_${f}" type="${ty=="date"?"date":ty=="num"?"number":"text"}" placeholder="${l}">`;
+  const cell=(r,[f,l,ty,o,ed])=>isE(ty)?(r[f]?esc(em(r[f]).name):""):ty=="sel"&&ed?`<select onchange="cupd('${c.tb}',${r.id},'${f}',this.value)">${o.map(x=>`<option ${r[f]==x?"selected":""}>${x}</option>`).join("")}</select>`:ty=="bool"?`<input type="checkbox" ${r[f]?"checked":""} onchange="cupd('${c.tb}',${r.id},'${f}',this.checked)">`:esc(r[f]);
+  
+  let actionCol = "";
+  if(k === "candidates"){
+    actionCol = `<th>Hành động</th>`;
+  }
+
+  return`<div class="cd"><h2><i class="ti ti-briefcase"></i> ${c.t}</h2>${c.top?c.top():""}<div class="f">${c.cols.map(inp).join("")}</div><button class="p" onclick="cadd('${k}')">Thêm</button></div>
+  <div class="cd"><div class="tw"><table><thead><tr>${c.cols.map(x=>`<th>${x[1]}</th>`).join("")}${actionCol}<th></th></tr></thead><tbody>${rows.map(r=>{
+    let actBtn = "";
+    if(k === "candidates" && r.stage !== "Đã nhận"){
+      actBtn = `<td><button class="p sm" style="background:var(--ok)" onclick="hireCandidate(${r.id},'${esc(r.name)}','${esc(r.email||'')}','${esc(r.position||'')}')"><i class="ti ti-check"></i> Đã nhận</button></td>`;
+    } else if (k === "candidates") {
+      actBtn = `<td><span class="tag Hired">Đã nhận</span></td>`;
+    }
+    return `<tr>${c.cols.map(x=>`<td>${cell(r,x)}</td>`).join("")}${actBtn}<td><button class="sm" onclick="cdel('${c.tb}',${r.id})">Xóa</button></td></tr>`
+  }).join("")||`<tr><td colspan="${c.cols.length + (actionCol?2:1)}" class="mu">Chưa có dữ liệu</td></tr>`}</tbody></table></div></div>`
+}
 function cadd(k){const c=CFG[k],o={};for(const [f,l,ty] of c.cols){if(ty=="bool")continue;const x=document.getElementById("c_"+f).value.trim();if(ty=="emp"&&!x){MSG="Hãy chọn nhân viên";return draw()}if(x!=="")o[f]=ty=="num"?+x:x}run(sb.from(c.tb).insert(o))}
 const cupd=(tb,id,f,x)=>run(sb.from(tb).update({[f]:x}).eq("id",id));
 const cdel=(tb,id)=>confirm("Xóa dòng này?")&&run(sb.from(tb).delete().eq("id",id));
 function tmpl(k){const u=document.getElementById("tk_emp").value;if(!u){MSG="Hãy chọn nhân viên";return draw()}run(sb.from("tasks").insert(TPL[k].map(t=>({user_id:u,kind:k,title:t}))))}
 V.ct=()=>crud("contracts");V.rc=()=>crud("candidates");V.tk=()=>crud("tasks");V.as=()=>crud("assets");V.rv=()=>crud("reviews");
+
+async function hireCandidate(id, name, email, position) {
+  if (!confirm(`Bạn có chắc chắn muốn nhận ${name} vào làm việc? Hệ thống sẽ tự động tạo tài khoản nhân viên.`)) return;
+  if (!email) return alert("Ứng viên này chưa có Email. Không thể tạo tài khoản.");
+  
+  const defaultPass = "123456";
+  MSG = "Đang xử lý...";
+  draw();
+
+  // Gọi Edge Function để tạo user Auth (Bắt buộc dùng Admin API)
+  const res = await fn({ action: "create", email: email, password: defaultPass, name: name, pos: position });
+  
+  if (MSG && MSG.includes("Lỗi")) {
+    return;
+  }
+  
+  // Đánh dấu ứng viên là Đã nhận
+  await sb.from("candidates").update({ stage: "Đã nhận" }).eq("id", id);
+  
+  MSG = `Đã nhận ${name}! Tài khoản: ${email} | Mật khẩu: ${defaultPass}`;
+  await load();
+}
+
 function alerts(){const m=new Date().getMonth()+1,bd=P.filter(e=>e.birthday&&+e.birthday.slice(5,7)==m).sort((a,b)=>a.birthday.slice(8)-b.birthday.slice(8)),ex=hr()?(DB.contracts||[]).filter(c=>c.end_date&&c.end_date>=td&&(new Date(c.end_date)-new Date(td))/864e5<=30):[];if(!bd.length&&!ex.length)return"";
-return`<div class="cd"><h2>Cần chú ý</h2>${ex.map(c=>`<div class="an"><i class="ti ti-file-alert"></i><div><b>${esc(em(c.user_id).name)}</b><div class="mu">Hợp đồng hết hạn ${c.end_date}</div></div></div>`).join("")}${bd.map(e=>`<div class="an"><i class="ti ti-cake"></i><div><b>${esc(e.name)}</b><div class="mu">Sinh nhật ${e.birthday.slice(8)}/${e.birthday.slice(5,7)}</div></div></div>`).join("")}</div>`}
+return`<div class="cd"><h2><i class="ti ti-alert-triangle"></i> Cần chú ý</h2>${ex.map(c=>`<div class="an"><i class="ti ti-file-alert"></i><div><b>${esc(em(c.user_id).name)}</b><div class="mu">Hợp đồng hết hạn ${c.end_date}</div></div></div>`).join("")}${bd.map(e=>`<div class="an"><i class="ti ti-cake"></i><div><b>${esc(e.name)}</b><div class="mu">Sinh nhật ${e.birthday.slice(8)}/${e.birthday.slice(5,7)}</div></div></div>`).join("")}</div>`}
 function mine(){if(hr())return"";const o=[["contracts","Hợp đồng của tôi",c=>`${esc(c.type)}: ${c.start_date||""} → ${c.end_date||"∞"}`],["assets","Tài sản được cấp",a=>`${esc(a.name)} (${esc(a.code||"")}) · ${esc(a.status)}`],["tasks","Công việc nhận/nghỉ việc",t=>`${t.done?"✔":"☐"} ${esc(t.title)}`],["reviews","Đánh giá hiệu suất",r=>`${esc(r.period)}: ${r.score}/5 ${esc(r.note||"")}`]];
-return o.map(([k,t,f])=>{const rows=(DB[k]||[]).filter(r=>r.user_id==ME.id);return rows.length?`<div class="cd"><h2>${t}</h2>${rows.map(r=>`<p>${f(r)}</p>`).join("")}</div>`:""}).join("")}
-function mini(){const n=new Date(),y=n.getFullYear(),m=n.getMonth(),ev={};C.forEach(l=>dl(l.from_date,l.to_date).forEach(d=>ev[d]=1));const first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();let c=["T2","T3","T4","T5","T6","T7","CN"].map(x=>`<i class="mh">${x}</i>`).join("");for(let i=0;i<first;i++)c+="<i></i>";for(let d=1;d<=days;d++){const k=iso(new Date(y,m,d));c+=`<i class="md ${k==td?"td":""} ${ev[k]?"hv":""}">${d}</i>`}return`<div class="cd"><h2>Tháng ${m+1}, ${y}</h2><div class="mini">${c}</div><p class="mu" style="margin:8px 0 0">Chấm nhỏ: có người nghỉ</p></div>`}
+return o.map(([k,t,f])=>{const rows=(DB[k]||[]).filter(r=>r.user_id==ME.id);return rows.length?`<div class="cd"><h2><i class="ti ti-clipboard-list"></i> ${t}</h2>${rows.map(r=>`<p>${f(r)}</p>`).join("")}</div>`:""}).join("")}
+function mini(){const n=new Date(),y=n.getFullYear(),m=n.getMonth(),ev={};C.forEach(l=>dl(l.from_date,l.to_date).forEach(d=>ev[d]=1));const first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();let c=["T2","T3","T4","T5","T6","T7","CN"].map(x=>`<i class="mh">${x}</i>`).join("");for(let i=0;i<first;i++)c+="<i></i>";for(let d=1;d<=days;d++){const k=iso(new Date(y,m,d));c+=`<i class="md ${k==td?"td":""} ${ev[k]?"hv":""}">${d}</i>`}return`<div class="cd"><h2><i class="ti ti-calendar-time"></i> Tháng ${m+1}, ${y}</h2><div class="mini">${c}</div><p class="mu" style="margin:8px 0 0">Chấm nhỏ: có người nghỉ</p></div>`}
 const MW={1:5310000,2:4730000,3:4140000,4:3700000},LCS=ym=>ym>="2026-07"?2530000:2340000,BK=[[1e7,.05],[3e7,.1],[6e7,.2],[1e8,.3],[Infinity,.35]];
 function pit(x){let t=0,lo=0;for(const [hi,r] of BK){if(x>lo)t+=(Math.min(x,hi)-lo)*r;lo=hi}return Math.round(t)}
 function calc(e){const t=sal(e.id),j=ADJ.find(a=>a.month==PM&&a.user_id==e.id)||{},u=L.filter(l=>l.user_id==e.id&&l.status=="Duyet"&&l.type=="Nghỉ không lương").reduce((x,l)=>x+dl(l.from_date,l.to_date).filter(d=>d.slice(0,7)==PM).length,0),sl=+t.sal||0,al=+t.al||0,dd=Math.round(sl/22*u),bo=+j.bonus||0,ot=+j.ot||0,pe=+j.penalty||0,mw=MW[t.region||1]||MW[1],ins=t.insured!==false,base=Math.max(t.ins_base!=null?+t.ins_base:sl,mw),b1=Math.min(base,20*LCS(PM)),b2=Math.min(base,20*mw),R=Math.round;
@@ -595,22 +644,22 @@ return{id:e.id,name:e.name,sal:sl,al,bonus:bo,ot,penalty:pe,u,dd,xh,yt,tn,b,er,t
 function payRows(){const run=RUN.filter(x=>x.month==PM);if(run.length)return run.filter(x=>hr()||x.user_id==ME.id).map(x=>({id:x.user_id,name:em(x.user_id).name,sal:+x.sal,al:+x.al,bonus:+x.bonus||0,ot:+x.ot||0,penalty:+x.penalty||0,u:x.unpaid_days,dd:+x.deduct,xh:+x.bhxh||0,yt:+x.bhyt||0,tn:+x.bhtn||0,b:+x.insurance,er:+x.er_total||0,ttax:+x.taxable||0,tax:+x.tax||0,net:+x.net}));
 return P.filter(e=>hr()||e.id==ME.id).map(calc)}
 const lockPay=()=>run(sb.from("payroll_runs").upsert(payRows().map(r=>({month:PM,user_id:r.id,sal:r.sal,al:r.al,bonus:r.bonus,ot:r.ot,penalty:r.penalty,unpaid_days:r.u,deduct:r.dd,insurance:r.b,bhxh:r.xh,bhyt:r.yt,bhtn:r.tn,er_total:r.er,taxable:r.ttax,tax:r.tax,net:r.net}))));
-const insCard=()=>`<div class="cd"><h2>Bảo hiểm và thuế theo nhân viên</h2><p class="mu">Vùng xác định lương tối thiểu và trần BHTN. Để trống Lương đóng BH thì dùng lương cơ bản. Mỗi người phụ thuộc được giảm trừ 6,2 triệu mỗi tháng.</p><div class="tw"><table><thead><tr><th>Nhân viên</th><th>Vùng</th><th>Lương đóng BH</th><th>Người phụ thuộc</th><th>Đóng BH</th></tr></thead><tbody>${P.map(e=>{const t=sal(e.id);return`<tr><td>${esc(e.name)}</td><td><select onchange="upd('salaries','user_id','${e.id}','region',+this.value)">${[1,2,3,4].map(r=>`<option value="${r}" ${(t.region||1)==r?"selected":""}>Vùng ${["I","II","III","IV"][r-1]}</option>`).join("")}</select></td><td><input style="width:130px" type="number" value="${t.ins_base??""}" placeholder="= lương CB" onchange="upd('salaries','user_id','${e.id}','ins_base',this.value===''?null:+this.value)"></td><td><input style="width:70px" type="number" min="0" value="${t.dependents||0}" onchange="upd('salaries','user_id','${e.id}','dependents',+this.value||0)"></td><td><input type="checkbox" ${t.insured===false?"":"checked"} onchange="upd('salaries','user_id','${e.id}','insured',this.checked)"></td></tr>`}).join("")}</tbody></table></div></div>`;
+const insCard=()=>`<div class="cd"><h2><i class="ti ti-shield-check"></i> Bảo hiểm và thuế theo nhân viên</h2><p class="mu">Vùng xác định lương tối thiểu và trần BHTN. Để trống Lương đóng BH thì dùng lương cơ bản. Mỗi người phụ thuộc được giảm trừ 6,2 triệu mỗi tháng.</p><div class="tw"><table><thead><tr><th>Nhân viên</th><th>Vùng</th><th>Lương đóng BH</th><th>Người phụ thuộc</th><th>Đóng BH</th></tr></thead><tbody>${P.map(e=>{const t=sal(e.id);return`<tr><td>${esc(e.name)}</td><td><select onchange="upd('salaries','user_id','${e.id}','region',+this.value)">${[1,2,3,4].map(r=>`<option value="${r}" ${(t.region||1)==r?"selected":""}>Vùng ${["I","II","III","IV"][r-1]}</option>`).join("")}</select></td><td><input style="width:130px" type="number" value="${t.ins_base??""}" placeholder="= lương CB" onchange="upd('salaries','user_id','${e.id}','ins_base',this.value===''?null:+this.value)"></td><td><input style="width:70px" type="number" min="0" value="${t.dependents||0}" onchange="upd('salaries','user_id','${e.id}','dependents',+this.value||0)"></td><td><input type="checkbox" ${t.insured===false?"":"checked"} onchange="upd('salaries','user_id','${e.id}','insured',this.checked)"></td></tr>`}).join("")}</tbody></table></div></div>`;
 const unlockPay=()=>run(sb.from("payroll_runs").delete().eq("month",PM));
 function dlf(t,type,name){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type}));a.download=name;a.click()}
 V.att=function(){const r=AT.find(a=>a.user_id==ME.id&&a.day==td)||{},f=t=>t?new Date(t).toTimeString().slice(0,5):"--",list=AT.filter(a=>hr()||a.user_id==ME.id).slice(0,60);
-return`<div class="cd"><h2>Hôm nay (${td})</h2><p class="mu">Vào: ${f(r.check_in)} · Ra: ${f(r.check_out)}</p><button class="p" onclick="ck('in')" ${r.check_in?"disabled":""}>Check-in</button> <button onclick="ck('out')" ${!r.check_in||r.check_out?"disabled":""}>Check-out</button></div><div class="cd"><h2>Lịch sử chấm công</h2><div class="tw"><table><thead><tr><th>Ngày</th><th>Nhân viên</th><th>Vào</th><th>Ra</th></tr></thead><tbody>${list.map(a=>`<tr><td>${a.day}</td><td>${esc(em(a.user_id).name)}</td><td>${f(a.check_in)}</td><td>${f(a.check_out)}</td></tr>`).join("")||`<tr><td colspan="4" class="mu">Chưa có dữ liệu</td></tr>`}</tbody></table></div></div>`};
+return`<div class="cd"><h2><i class="ti ti-clock"></i> Hôm nay (${td})</h2><p class="mu">Vào: ${f(r.check_in)} · Ra: ${f(r.check_out)}</p><button class="p" onclick="ck('in')" ${r.check_in?"disabled":""}>Check-in</button> <button onclick="ck('out')" ${!r.check_in||r.check_out?"disabled":""}>Check-out</button></div><div class="cd"><h2><i class="ti ti-history"></i> Lịch sử chấm công</h2><div class="tw"><table><thead><tr><th>Ngày</th><th>Nhân viên</th><th>Vào</th><th>Ra</th></tr></thead><tbody>${list.map(a=>`<tr><td>${a.day}</td><td>${esc(em(a.user_id).name)}</td><td>${f(a.check_in)}</td><td>${f(a.check_out)}</td></tr>`).join("")||`<tr><td colspan="4" class="mu">Chưa có dữ liệu</td></tr>`}</tbody></table></div></div>`};
 const ck=k=>k=="in"?run(sb.from("attendance").insert({day:td,check_in:new Date().toISOString()})):run(sb.from("attendance").update({check_out:new Date().toISOString()}).eq("user_id",ME.id).eq("day",td));
-V.me=function(){return`<div class="cd"><h2>Hồ sơ của tôi</h2><div class="f"><div><span class="mu">Họ tên</span><br>${esc(ME.name)}</div><div><span class="mu">Email</span><br>${esc(ME.email)}</div><div><span class="mu">Phòng ban</span><br>${esc(ME.dept)||"--"}</div><div><span class="mu">Chức vụ</span><br>${esc(ME.pos)||"--"}</div><div><span class="mu">Ngày vào làm</span><br>${ME.start_date||"--"}</div></div><div class="f"><input id="ph" placeholder="Số điện thoại" value="${esc(ME.phone)}"><input id="bd" type="date" value="${ME.birthday||""}"></div><button class="p" onclick="saveMe()">Lưu thông tin</button></div><div class="cd"><h2>Đổi mật khẩu</h2><div class="f"><input id="np" type="password" placeholder="Mật khẩu mới"><input id="np2" type="password" placeholder="Nhập lại mật khẩu"></div><button class="p" onclick="setPw()">Đổi mật khẩu</button></div>`+mine()};
+V.me=function(){return`<div class="cd"><h2><i class="ti ti-user"></i> Hồ sơ của tôi</h2><div class="f"><div><span class="mu">Họ tên</span><br>${esc(ME.name)}</div><div><span class="mu">Email</span><br>${esc(ME.email)}</div><div><span class="mu">Phòng ban</span><br>${esc(ME.dept)||"--"}</div><div><span class="mu">Chức vụ</span><br>${esc(ME.pos)||"--"}</div><div><span class="mu">Ngày vào làm</span><br>${ME.start_date||"--"}</div></div><div class="f"><input id="ph" placeholder="Số điện thoại" value="${esc(ME.phone)}"><input id="bd" type="date" value="${ME.birthday||""}"></div><button class="p" onclick="saveMe()">Lưu thông tin</button></div><div class="cd"><h2><i class="ti ti-key"></i> Đổi mật khẩu</h2><div class="f"><input id="np" type="password" placeholder="Mật khẩu mới"><input id="np2" type="password" placeholder="Nhập lại mật khẩu"></div><button class="p" onclick="setPw()">Đổi mật khẩu</button></div>`+mine()};
 const saveMe=()=>run(sb.rpc("update_my_profile",{p_phone:v("ph"),p_birthday:v("bd")||null}));
 async function setPw(){const a=v("np"),b=v("np2");if(a.length<6||a!=b){MSG="Mật khẩu tối thiểu 6 ký tự và hai ô phải giống nhau";return draw()}const r=await sb.auth.updateUser({password:a});if(r.error){MSG="Lỗi: "+r.error.message;return draw()}RECOV=false;MSG="Đã đổi mật khẩu";await load()}
 async function forgot(){const e=v("le");if(!e){MSG="Nhập email rồi bấm lại";return draw()}const r=await sb.auth.resetPasswordForEmail(e,{redirectTo:location.origin+location.pathname});MSG=r.error?"Lỗi: "+r.error.message:"Nếu email tồn tại, hệ thống đã gửi thư đặt lại mật khẩu";draw()}
-V.set=function(){return`<div class="cd"><h2>Ngày lễ (không tính vào ngày nghỉ)</h2><div class="f"><input id="hd" type="date"><input id="hn" placeholder="Tên ngày lễ"><button class="p" onclick="addHol()">Thêm</button></div>${HD.map(h=>`<div class="an"><i class="ti ti-confetti"></i><div><b>${esc(h.name)}</b><div class="mu">${h.day}</div></div><button class="sm" onclick="delHol('${h.day}')">Xóa</button></div>`).join("")||`<p class="mu">Chưa có ngày lễ</p>`}</div>${insCard()}<div class="cd"><h2>Nhật ký thao tác</h2>${AU.map(a=>`<div class="an"><i class="ti ti-history"></i><div><b>${esc(a.action)}</b><div class="mu">${esc(a.detail)} · ${esc(em(a.actor).name)} · ${new Date(a.at).toLocaleString(LOC())}</div></div></div>`).join("")||`<p class="mu">Chưa có nhật ký</p>`}</div><div class="cd"><h2>Sao lưu dữ liệu</h2><p class="mu">Tải toàn bộ dữ liệu về máy dạng JSON. Nên làm mỗi tuần.</p><button class="p" onclick="backup()"><i class="ti ti-download"></i> Tải bản sao lưu</button></div>`};
+V.set=function(){return`<div class="cd"><h2><i class="ti ti-confetti"></i> Ngày lễ (không tính vào ngày nghỉ)</h2><div class="f"><input id="hd" type="date"><input id="hn" placeholder="Tên ngày lễ"><button class="p" onclick="addHol()">Thêm</button></div>${HD.map(h=>`<div class="an"><i class="ti ti-confetti"></i><div><b>${esc(h.name)}</b><div class="mu">${h.day}</div></div><button class="sm" onclick="delHol('${h.day}')">Xóa</button></div>`).join("")||`<p class="mu">Chưa có ngày lễ</p>`}</div>${insCard()}<div class="cd"><h2><i class="ti ti-history"></i> Nhật ký thao tác</h2>${AU.map(a=>`<div class="an"><i class="ti ti-history"></i><div><b>${esc(a.action)}</b><div class="mu">${esc(a.detail)} · ${esc(em(a.actor).name)} · ${new Date(a.at).toLocaleString(LOC())}</div></div></div>`).join("")||`<p class="mu">Chưa có nhật ký</p>`}</div><div class="cd"><h2><i class="ti ti-cloud-download"></i> Sao lưu dữ liệu</h2><p class="mu">Tải toàn bộ dữ liệu về máy dạng JSON. Nên làm mỗi tuần.</p><button class="p" onclick="backup()"><i class="ti ti-download"></i> Tải bản sao lưu</button></div>`};
 const addHol=()=>v("hd")&&run(sb.from("holidays").insert({day:v("hd"),name:v("hn")||"Ngày lễ"}));
 const delHol=d=>run(sb.from("holidays").delete().eq("day",d));
 const backup=()=>dlf(JSON.stringify({profiles:P,salaries:SL,leaves:L,attendance:AT,payroll_runs:RUN,holidays:HD,announcements:A},null,1),"application/json","hr-backup-"+td+".json");
 
-/* --- NÂNG CẤP TRANG BÁO CÁO (DASHBOARD) --- */
+/* --- DASHBOARD --- */
 V.rp=function(){
   const m=Array(12).fill(0),dp={},y=td.slice(0,4),n=x=>L.filter(l=>l.status==x).length;
   L.filter(l=>l.status=="Duyet").forEach(l=>dl(l.from_date,l.to_date).forEach(d=>{
@@ -641,7 +690,7 @@ V.rp=function(){
   </div>
 
   <div class="cd" style="padding:24px">
-    <div class="dash-title" style="font-size:14px;color:var(--tx)"><i class="ti ti-chart-bar"></i> Ngày nghỉ đã duyệt theo tháng (${y})</div>
+    <h2><i class="ti ti-chart-bar"></i> Ngày nghỉ đã duyệt theo tháng (${y})</h2>
     <div class="chart-bars">
       ${m.map((val,i)=>`
         <div class="bar-col">
@@ -653,7 +702,7 @@ V.rp=function(){
   </div>
 
   <div class="cd" style="padding:24px">
-    <div class="dash-title" style="font-size:14px;color:var(--tx)"><i class="ti ti-chart-pie"></i> Phân bổ ngày nghỉ theo phòng ban</div>
+    <h2><i class="ti ti-chart-pie"></i> Phân bổ ngày nghỉ theo phòng ban</h2>
     <div style="margin-top:20px">
       ${Object.entries(dp).map(([k,c])=>`
         <div class="progress-row">
