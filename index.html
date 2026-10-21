@@ -889,4 +889,99 @@ function cadd(k){const c=CFG[k],o={};for(const [f,l,ty] of c.cols){if(ty=="bool"
 
 async function hireCandidate(id,name,email,position){
   if(!confirm(t("hire_confirm",{n:name})))return;
-  if(!email)return alert(t("hire_no_email
+  if(!email)return alert(t("hire_no_email"));
+  const defaultPass="123456";
+  MSG="...";draw();
+  await fn({action:"create",email,password:defaultPass,name,pos:position});
+  if(MSG&&(MSG.startsWith("Lỗi")||MSG.startsWith("Error")))return;
+  await sb.from("candidates").update({stage:t("rc_onboard")}).eq("id",id);
+  MSG=t("hire_success",{n:name,e:email,p:defaultPass});
+  await load();
+}
+
+const MW={1:5310000,2:4730000,3:4140000,4:3700000},LCS=ym=>ym>="2026-07"?2530000:2340000,BK=[[1e7,.05],[3e7,.1],[6e7,.2],[1e8,.3],[Infinity,.35]];
+function pit(x){let tt=0,lo=0;for(const [hi,r] of BK){if(x>lo)tt+=(Math.min(x,hi)-lo)*r;lo=hi}return Math.round(tt)}
+function calc(e){
+  const tt=sal(e.id),j=ADJ.find(a=>a.month==PM&&a.user_id==e.id)||{},
+    u=L.filter(l=>l.user_id==e.id&&l.status=="Duyet"&&l.type=="Nghỉ không lương").reduce((x,l)=>x+dl(l.from_date,l.to_date).filter(d=>d.slice(0,7)==PM).length,0),
+    sl=+tt.sal||0,al=+tt.al||0,dd=Math.round(sl/22*u),bo=+j.bonus||0,ot=+j.ot||0,pe=+j.penalty||0,
+    mw=MW[tt.region||1]||MW[1],ins=tt.insured!==false,base=Math.max(tt.ins_base!=null?+tt.ins_base:sl,mw),
+    b1=Math.min(base,20*LCS(PM)),b2=Math.min(base,20*mw),R=Math.round;
+  const xh=ins?R(b1*.08):0,yt=ins?R(b1*.015):0,tn=ins?R(b2*.01):0,b=xh+yt+tn,er=ins?R(b1*.175)+R(b1*.03)+R(b2*.01):0,
+    income=Math.max(0,sl+al+bo+ot-dd),ttax=Math.max(0,income-15500000-6200000*(+tt.dependents||0)-b),tx=pit(ttax);
+  return {id:e.id,name:e.name,sal:sl,al,bonus:bo,ot,penalty:pe,u,dd,xh,yt,tn,b,er,ttax,tax:tx,net:sl+al+bo+ot-pe-dd-b-tx};
+}
+function payRows(){
+  const run_=RUN.filter(x=>x.month==PM);
+  if(run_.length)return run_.filter(x=>hr()||x.user_id==ME.id).map(x=>({id:x.user_id,name:em(x.user_id).name,sal:+x.sal,al:+x.al,bonus:+x.bonus||0,ot:+x.ot||0,penalty:+x.penalty||0,u:x.unpaid_days,dd:+x.deduct,xh:+x.bhxh||0,yt:+x.bhyt||0,tn:+x.bhtn||0,b:+x.insurance,er:+x.er_total||0,ttax:+x.taxable||0,tax:+x.tax||0,net:+x.net}));
+  return P.filter(e=>hr()||e.id==ME.id).map(calc);
+}
+const lockPay=()=>run(sb.from("payroll_runs").upsert(payRows().map(r=>({month:PM,user_id:r.id,sal:r.sal,al:r.al,bonus:r.bonus,ot:r.ot,penalty:r.penalty,unpaid_days:r.u,deduct:r.dd,insurance:r.b,bhxh:r.xh,bhyt:r.yt,bhtn:r.tn,er_total:r.er,taxable:r.ttax,tax:r.tax,net:r.net}))));
+const unlockPay=()=>run(sb.from("payroll_runs").delete().eq("month",PM));
+const insCard=()=>`<div class="cd"><h2><i class="ti ti-shield-check"></i> ${t("ins_title")}</h2><p class="mu">${t("ins_hint")}</p><div class="tw"><table><thead><tr><th>${t("col_employee")}</th><th>${t("col_region")}</th><th>${t("col_ins_base")}</th><th>${t("col_dep")}</th><th>${t("col_insured")}</th></tr></thead><tbody>
+${P.map(e=>{const s=sal(e.id);return`<tr><td>${userLink(e.id)}</td><td><select onchange="upd('salaries','user_id','${e.id}','region',+this.value)">${[1,2,3,4].map(r=>`<option value="${r}" ${(s.region||1)==r?"selected":""}>${t("region")} ${["I","II","III","IV"][r-1]}</option>`).join("")}</select></td><td><input style="width:130px" type="number" value="${s.ins_base??""}" placeholder="= ${t("salary")}" onchange="upd('salaries','user_id','${e.id}','ins_base',this.value===''?null:+this.value)"></td><td><input style="width:70px" type="number" min="0" value="${s.dependents||0}" onchange="upd('salaries','user_id','${e.id}','dependents',+this.value||0)"></td><td><input type="checkbox" ${s.insured===false?"":"checked"} onchange="upd('salaries','user_id','${e.id}','insured',this.checked)"></td></tr>`}).join("")}
+</tbody></table></div></div>`;
+
+const HDR=()=>["col_employee","col_sal","allowance","col_bonus","col_ot","col_penalty","col_unpaid","col_bhxh","col_bhyt","col_bhtn","col_taxable","col_tax","col_net","col_er"];
+const HDRS=()=>(hr()?HDR():HDR().slice(0,13)).map(k=>t(k));
+const ROWS=()=>payRows().map(x=>[x.name,x.sal,x.al,x.bonus,x.ot,x.penalty,x.dd,x.xh,x.yt,x.tn,x.ttax,x.tax,x.net,x.er]).map(a=>hr()?a:a.slice(0,13));
+function dlf(tx,type,name){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([tx],{type}));a.download=name;a.click()}
+function csv(){dlf("\ufeff"+[HDRS(),...ROWS()].map(a=>a.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(",")).join("\n"),"text/csv;charset=utf-8","bang-luong-"+PM+".csv")}
+const needX=()=>{if(typeof XLSX=="undefined"){MSG=t("err_excel_lib");draw();return true}};
+function xlsx(){if(needX())return;const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet([HDRS(),...ROWS()]),"Payroll "+PM);XLSX.writeFile(wb,"bang-luong-"+PM+".xlsx")}
+function tpl(){if(needX())return;const h=[t("email"),t("fullname"),t("col_bonus"),t("col_ot"),t("col_penalty"),t("salary"),t("allowance")],rows=P.map(e=>{const x=sal(e.id),j=ADJ.find(a=>a.month==PM&&a.user_id==e.id)||{};return[e.email,e.name,+j.bonus||0,+j.ot||0,+j.penalty||0,+x.sal||0,+x.al||0]}),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet([h,...rows]),"Import");XLSX.writeFile(wb,"mau-nhap-luong-"+PM+".xlsx")}
+function importXlsx(inp){const f=inp.files[0];if(!f||needX())return;const rd=new FileReader();rd.onload=async ev=>{try{const wb=XLSX.read(ev.target.result,{type:"array"}),rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:""}),g=(o,ks)=>{const k=Object.keys(o).find(x=>ks.includes(x.trim().toLowerCase()));return k===undefined||o[k]===""||isNaN(+o[k])?undefined:+o[k]},ad=[],sa=[];let miss=0;
+for(const o of rows){const ek=Object.keys(o).find(x=>x.trim().toLowerCase()=="email"),mail=ek?String(o[ek]).trim().toLowerCase():"",p=P.find(x=>(x.email||"").toLowerCase()==mail);if(!p){if(mail)miss++;continue}
+const b=g(o,["thưởng","bonus"]),tt=g(o,["tăng ca","overtime"]),pe=g(o,["phạt","penalty"]),sl=g(o,["lương cơ bản","base salary"]),al=g(o,["phụ cấp","allowance"]);
+if([b,tt,pe].some(x=>x!==undefined)){const j=ADJ.find(z=>z.month==PM&&z.user_id==p.id)||{};ad.push({month:PM,user_id:p.id,bonus:b??(+j.bonus||0),ot:tt??(+j.ot||0),penalty:pe??(+j.penalty||0)})}
+if(sl!==undefined||al!==undefined){const c=sal(p.id);sa.push({user_id:p.id,sal:sl??(+c.sal||0),al:al??(+c.al||0)})}}
+let er=null;if(ad.length)er=(await sb.from("payroll_adj").upsert(ad)).error;if(!er&&sa.length)er=(await sb.from("salaries").upsert(sa)).error;
+MSG=er?t("err_prefix")+": "+er.message:"OK ("+ad.length+"/"+sa.length+")"+(miss?" ("+miss+" miss)":"")}catch(x){MSG=t("err_file")+": "+x.message}inp.value="";await load()};rd.readAsArrayBuffer(f)}
+function pdf(){const w=window.open("","_blank");if(!w)return;const th=HDRS(),rows=ROWS();
+w.document.write(`<html><head><meta charset="utf-8"><title>Payroll</title><style>@page{size:landscape;margin:12mm}body{font-family:sans-serif;font-size:11px}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ccc;padding:5px;text-align:right}th:first-child,td:first-child{text-align:left}th{background:#eef4ff}</style></head><body><h2>${t("payroll_sheet",{m:PM.slice(5)+"/"+PM.slice(0,4)})}</h2><table><thead><tr>${th.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>`<td>${i?vnd(c):esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table><script>setTimeout(function(){print()},500)<\/script></body></html>`);w.document.close()}
+function slip(id){const r=payRows().find(x=>x.id==id);if(!r)return;const w=window.open("","_blank"),row=(a,b)=>`<tr><td>${a}</td><td style="text-align:right">${b}</td></tr>`;
+w.document.write(`<html><head><meta charset="utf-8"><title>${t("payroll_slip",{m:PM})}</title><style>body{font-family:sans-serif;max-width:600px;margin:30px auto}table{width:100%;border-collapse:collapse}td{padding:8px;border-bottom:1px solid #ddd}.m{color:#666;font-size:13px}</style></head><body><h2>${t("payroll_slip",{m:PM.slice(5)+"/"+PM.slice(0,4)})}</h2><p>${t("slip_employee")}: <b>${esc(r.name)}</b></p><table>${row(t("salary"),vnd(r.sal))}${row(t("allowance"),vnd(r.al))}${row(t("col_bonus"),vnd(r.bonus))}${row(t("col_ot"),vnd(r.ot))}${row(t("slip_unpaid",{n:r.u}),"-"+vnd(r.dd))}${row(t("col_bhxh"),"-"+vnd(r.xh))}${row(t("col_bhyt"),"-"+vnd(r.yt))}${row(t("col_bhtn"),"-"+vnd(r.tn))}${row(t("col_taxable"),"<span class=m>"+vnd(r.ttax)+"</span>")}${row(t("col_tax"),"-"+vnd(r.tax))}${row(t("col_penalty"),"-"+vnd(r.penalty))}${row("<b>"+t("slip_net")+"</b>","<b>"+vnd(r.net)+"</b>")}</table><p class="m">${t("slip_er_note",{v:vnd(r.er)})}</p><script>setTimeout(function(){print()},300)<\/script></body></html>`);w.document.close()}
+
+function addAnn(){v("at")&&run(sb.from("announcements").insert({title:v("at")}))}
+const delAnn=id=>run(sb.from("announcements").delete().eq("id",id));
+function addLv(){
+  const f=v("lf"),o=v("lo"),ty=v("lt"),n=f&&o&&o>=f?dl(f,o).length:-1;
+  if(n<0){MSG=t("err_invalid_dates");return draw()}
+  if(!n){MSG=t("err_weekend_only");return draw()}
+  if(ty==t("type_annual")&&n>QUOTA-used(ME.id)){MSG=t("err_quota");return draw()}
+  run(sb.from("leaves").insert({type:ty,from_date:f,to_date:o,reason:v("lr")}));
+}
+const dec=(id,s)=>{let x={status:s};if(s=="Tu"){const r=prompt(t("reject_reason_ph"));if(r===null)return;x.reject_reason=r}run(sb.from("leaves").update(x).eq("id",id))};
+const cancel=id=>run(sb.from("leaves").delete().eq("id",id));
+function qLeave(off){
+  const d=new Date();d.setDate(d.getDate()+off);const k=iso(d);MSG="";
+  if(!dl(k,k).length){MSG=t("err_weekend_only");return draw()}
+  if(QUOTA-used(ME.id)<1){MSG=t("err_quota");return draw()}
+  if(!confirm(t("confirm_quick_leave",{d:k})))return;
+  run(sb.from("leaves").insert({type:"Phép năm",from_date:k,to_date:k,reason:t("reason_quick")}));
+}
+function apAll(){const n=L.filter(l=>l.status=="Cho").length;if(!n||!confirm(t("confirm_approve_all",{n})))return;run(sb.from("leaves").update({status:"Duyet"}).eq("status","Cho"))}
+const mv=k=>{CM=new Date(CM.getFullYear(),CM.getMonth()+k,1);draw()};
+async function run(p){const r=await p;MSG=r.error?t("err_prefix")+": "+r.error.message:"";await load()}
+const ck=k=>k=="in"?run(sb.from("attendance").insert({day:td,check_in:new Date().toISOString()})):run(sb.from("attendance").update({check_out:new Date().toISOString()}).eq("user_id",ME.id).eq("day",td));
+const saveMe=()=>run(sb.rpc("update_my_profile",{p_phone:v("ph"),p_birthday:v("bd")||null}));
+async function setPw(){const a=v("np"),b=v("np2");if(a.length<6||a!=b){MSG=t("pw_rule");return draw()}const r=await sb.auth.updateUser({password:a});if(r.error){MSG=t("err_prefix")+": "+r.error.message;return draw()}RECOV=false;MSG=t("pw_changed");await load()}
+async function forgot(){const e=v("le");if(!e){MSG=t("enter_email_first");return draw()}const r=await sb.auth.resetPasswordForEmail(e,{redirectTo:location.origin+location.pathname});MSG=r.error?t("err_prefix")+": "+r.error.message:t("reset_sent");draw()}
+const addHol=()=>v("hd")&&run(sb.from("holidays").insert({day:v("hd"),name:v("hn")||t("holiday_name")}));
+const delHol=d=>run(sb.from("holidays").delete().eq("day",d));
+const backup=()=>dlf(JSON.stringify({profiles:P,salaries:SL,leaves:L,attendance:AT,payroll_runs:RUN,holidays:HD,announcements:A},null,1),"application/json","hr-backup-"+td+".json");
+const adj=(id,f,x)=>run(sb.from("payroll_adj").upsert({month:PM,user_id:id,[f]:+x||0}));
+async function fn(body){const r=await sb.functions.invoke("smart-api",{body});if(r.error){let m=r.error.message;try{m=(await r.error.context.json()).error||m}catch(e){}MSG=t("err_prefix")+": "+m}else MSG=r.data&&r.data.error?t("err_prefix")+": "+r.data.error:"";await load()}
+
+function clk(){const c=document.getElementById("clk"),c2=document.getElementById("clk2");const now=new Date().toLocaleTimeString(LOC(),{hour12:false});if(c)c.textContent=now;if(c2)c2.textContent=now}
+async function fetchWeather(){const w=document.getElementById("weather");if(!w)return;try{const res=await fetch("https://api.open-meteo.com/v1/forecast?latitude=10.823&longitude=106.629&current_weather=true");const data=await res.json();const temp=Math.round(data.current_weather.temperature);const code=data.current_weather.weathercode;let icon="☀️",tx="Nắng";if(code>=1&&code<=3){icon="⛅";tx="Mây rải rác"}else if(code>=45&&code<=48){icon="🌫️";tx="Sương mù"}else if(code>=51&&code<=67){icon="🌧️";tx="Mưa"}else if(code>=71&&code<=77){icon="❄️";tx="Tuyết"}else if(code>=80&&code<=82){icon="🌦️";tx="Mưa rào"}else if(code>=95){icon="⛈️";tx="Giông bão"}w.innerHTML=`📍 TP.HCM · ${temp}°C ${icon} ${tx}`}catch(e){w.innerHTML=`📍 TP.HCM`}}
+function draw(){draw0();clk();if(T=="home")fetchWeather()}
+setInterval(clk,1000);
+const empOpts=()=>P.map(e=>`<option value="${e.id}">${esc(e.name)}</option>`).join("");
+
+sb.auth.onAuthStateChange(ev=>{if(ev=="PASSWORD_RECOVERY"){RECOV=true;draw()}});
+readHash();
+sb.auth.getSession().then(load);
+</script>
+</body>
+</html>
