@@ -47,8 +47,8 @@ section{background:var(--bg);min-width:0;display:flex;flex-direction:column}
 
 /* --- TOP BAR NỔI BẬT --- */
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 32px;flex-wrap:wrap;border-bottom:1px solid var(--bd);background:rgba(245,245,247,.72);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);position:sticky;top:0;z-index:10}
-.top-title{font-size:20px;font-weight:700;letter-spacing:-.03em;color:var(--tx);display:flex;align-items:center;gap:8px}
-.top-title i{color:var(--ac);font-size:24px}
+.top-title{font-size:22px;font-weight:700;letter-spacing:-.03em;color:var(--tx);display:flex;align-items:center;gap:10px}
+.top-title i{color:var(--ac);font-size:26px}
 
 main{padding:28px 32px 40px;flex:1;width:100%;max-width:1200px;margin:0 auto}
 .cd{background:var(--cd-solid);border:1px solid var(--bd);border-radius:var(--r-lg);padding:22px;margin-bottom:18px;box-shadow:var(--sh-sm);transition:box-shadow .25s ease}
@@ -617,14 +617,12 @@ async function hireCandidate(id, name, email, position) {
   MSG = "Đang xử lý...";
   draw();
 
-  // Gọi Edge Function để tạo user Auth (Bắt buộc dùng Admin API)
   const res = await fn({ action: "create", email: email, password: defaultPass, name: name, pos: position });
   
   if (MSG && MSG.includes("Lỗi")) {
     return;
   }
   
-  // Đánh dấu ứng viên là Đã nhận
   await sb.from("candidates").update({ stage: "Đã nhận" }).eq("id", id);
   
   MSG = `Đã nhận ${name}! Tài khoản: ${email} | Mật khẩu: ${defaultPass}`;
