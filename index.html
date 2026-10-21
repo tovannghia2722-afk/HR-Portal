@@ -43,9 +43,9 @@ aside{background:var(--cd);-webkit-backdrop-filter:saturate(180%) blur(24px);bac
 .av{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#0a84ff,#5e5ce6);color:#fff;font-size:13px;font-weight:600;flex:none}
 section{background:var(--bg);min-width:0;display:flex;flex-direction:column}
 
-/* --- TOP BAR (Bỏ chữ Good morning bị trùng) --- */
+/* --- TOP BAR (Breadcrumb) --- */
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 32px;flex-wrap:wrap;border-bottom:1px solid var(--bd);background:rgba(245,245,247,.72);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);position:sticky;top:0;z-index:10}
-.top>div>b{font-size:14px;letter-spacing:-.02em;color:var(--mu);text-transform:capitalize}
+.top>div:last-child>b{font-size:14px;letter-spacing:-.02em;color:var(--mu);text-transform:capitalize}
 
 main{padding:28px 32px 40px;flex:1;width:100%;max-width:1200px;margin:0 auto}
 .cd{background:var(--cd-solid);border:1px solid var(--bd);border-radius:var(--r-lg);padding:22px;margin-bottom:18px;box-shadow:var(--sh-sm);transition:box-shadow .25s ease}
@@ -228,11 +228,10 @@ function draw0(){
   const A_=document.getElementById("app");
   if(RECOV){A_.innerHTML=`<div class="cd lg"><div class="logo big">HR</div><h2>Đặt mật khẩu mới</h2><input id="np" type="password" placeholder="Mật khẩu mới"><input id="np2" type="password" placeholder="Nhập lại mật khẩu"><p class="no">${esc(MSG)}</p><button class="p" onclick="setPw()">Lưu mật khẩu</button></div>`;return}
   if(!ME){A_.innerHTML=`<div class="cd lg"><div class="logo big">HR</div><h2>Đăng nhập HR Portal</h2><p class="mu" style="margin:0 0 16px">Cổng nhân sự nội bộ</p><input id="le" placeholder="Email" type="email"><input id="lp" type="password" placeholder="Mật khẩu" onkeydown="if(event.key=='Enter')login()"><p class="no">${esc(MSG)}</p><button class="p" onclick="login()">Đăng nhập</button><p class="mu"><a href="#" onclick="forgot();return false">Quên mật khẩu?</a> · <a href="#" onclick="setLang(LANG=='en'?'vi':'en');return false">${LANG=="en"?"Tiếng Việt":"English"}</a></p></div>`;return}
-  const tabs=[["home","Trang chủ","ti-home"],["cal","Lịch nghỉ","ti-calendar-event"],["leave","Đơn nghỉ phép","ti-file-text"],["att","Chấm công","ti-clock"],["pay","Bảng lương","ti-cash"],["me","Hồ sơ","ti-user"]];
-  if(hr())tabs.push(["emp","Nhân viên","ti-users"],["rp","Báo cáo","ti-chart-bar"],["set","Cài đặt","ti-settings"]);
   
   A_.innerHTML=`<div class="app"><aside><div class="brand"><span class="logo">HR</span><b>HR Portal</b></div>${side()}<div class="ub"><span class="av">${esc(ME.name.trim().charAt(0).toUpperCase())}</span><div><b>${esc(ME.name)}</b><div class="mu">${hr()?"Quản lý":"Nhân viên"}</div></div><button class="gb" onclick="logout()" title="Đăng xuất"><i class="ti ti-logout"></i></button></div></aside><section>
-   <div class="top">
+  
+  <div class="top">
     <div style="display:flex;align-items:center;gap:12px">
       <span class="logo" style="width:28px;height:28px;font-size:11px">HR</span>
       <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--mu)">
@@ -248,6 +247,7 @@ function draw0(){
       <button class="lang" onclick="setLang(LANG=='en'?'vi':'en')" style="padding:6px 12px;font-size:12px;border-radius:8px"><i class="ti ti-world"></i> ${LANG=="en"?"EN":"VI"}</button>
     </div>
   </div>
+  
   <div id="notif-panel" class="notif-panel">${NTF.length?NTF.map(n=>`<div class="notif-item ${n.is_read?'':'unread'}"><b>${esc(n.title)}</b><span>${esc(n.content)} · ${new Date(n.created_at).toLocaleDateString()}</span></div>`).join(""):'<p class="mu">Không có thông báo</p>'}</div>
   <main>${MSG?`<p class="${/^Đã /.test(MSG)?"ok":"no"}">${esc(MSG)}</p>`:""}${V[T]()}</main>${cmdbar()}</section></div>`
 }
@@ -522,26 +522,13 @@ Cần chú ý|Needs attention
 Hợp đồng của tôi|My contracts
 Tài sản được cấp|Assigned assets
 Công việc nhận/nghỉ việc|My onboarding/offboarding tasks
-Đơn chờ duyệt|Pending requests
-Chấm để xem, chốt, in phiếu|Tap to view, close, print payslip
-Không có đơn chờ|No pending requests
-Còn|Left
-ngày phép|leave days
-người nghỉ|people off
-Chưa check-in|Not checked in
-Đã check-out lúc|Checked out at
-Vào lúc|In at
-chạm để check-out|tap to check out
-Xem ai nghỉ hôm nay|See who's off today
 Tổng quan nhân sự|HR Overview
 Tổng số|Total
-Nhân viên|Employees
 Cập nhật lúc|Updated at
 Tỷ lệ nghỉ phép|Leave rate
 Đơn từ|Requests
 Hiệu suất|Performance
 Theo tháng|By Month
-Phòng ban|Department
 Tỷ trọng|Proportion`.split("\n").forEach(l=>{const i=l.indexOf("|");if(i>0)m[l.slice(0,i)]=l.slice(i+1)});return m})();
 
 const PAT=[[/Chào (buổi sáng|buổi chiều|buổi tối), /g,(m,a)=>"Good "+(a=="buổi sáng"?"morning":a=="buổi chiều"?"afternoon":"evening")+", "],[/(Buổi sáng|Buổi chiều|Buổi tối) của /g,(m,a)=>"Good "+(a=="Buổi sáng"?"morning":a=="Buổi chiều"?"afternoon":"evening")+", "],
