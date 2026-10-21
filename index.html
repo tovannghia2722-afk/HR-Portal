@@ -606,7 +606,7 @@ function oneTap(){
   <div class="oc ck" onclick="go('leave',{status:'Cho'})">${dot(p+" "+t("pending_requests"),p>0)}${tile("n","ti-file-text")}<b>${hr()?t("approve_leave"):t("my_requests")}</b><span class="mu">${p?p+" "+t("pending_requests"):t("approved")}</span>${hr()&&p?`<div class="oa"><button class="p" onclick="event.stopPropagation();apAll()">${t("approve")}</button></div>`:""}</div>
   <div class="oc ck" onclick="go('pay')">${dot(hr()?(lk?t("st_Duyet"):t("st_Cho")):PM,hr()&&!lk)}${tile("g","ti-cash")}<b>${t("nav_pay")}</b><span class="mu">${hr()?t("view_payroll"):vnd(r?r.net:0)}</span></div>
   <div class="oc ck" onclick="go('cal')">${dot(o+" "+t("off_today"))}${tile("o","ti-calendar-event")}<b>${t("nav_cal")}</b><span class="mu">${t("off_today")}</span></div></div>`;
-}<script>
+}
 /* ===== BI REPORT ===== */
 V.rp=function(){
   const year=BI_STATE.year||td.slice(0,4);
