@@ -232,12 +232,21 @@ function draw0(){
   if(hr())tabs.push(["emp","Nhân viên","ti-users"],["rp","Báo cáo","ti-chart-bar"],["set","Cài đặt","ti-settings"]);
   
   A_.innerHTML=`<div class="app"><aside><div class="brand"><span class="logo">HR</span><b>HR Portal</b></div>${side()}<div class="ub"><span class="av">${esc(ME.name.trim().charAt(0).toUpperCase())}</span><div><b>${esc(ME.name)}</b><div class="mu">${hr()?"Quản lý":"Nhân viên"}</div></div><button class="gb" onclick="logout()" title="Đăng xuất"><i class="ti ti-logout"></i></button></div></aside><section>
-  <div class="top">
-    <div style="display:flex;gap:10px;align-items:center;order:2">
-      <button class="bell-btn" onclick="toggleNotif()"><i class="ti ti-bell"></i>${NTF.filter(n=>!n.is_read).length>0?`<span class="bell-dot">${NTF.filter(n=>!n.is_read).length}</span>`:''}</button>
-      <button class="lang" onclick="setLang(LANG=='en'?'vi':'en')"><i class="ti ti-language"></i> ${LANG=="en"?"Tiếng Việt":"English"}</button>
+   <div class="top">
+    <div style="display:flex;align-items:center;gap:12px">
+      <span class="logo" style="width:28px;height:28px;font-size:11px">HR</span>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--mu)">
+        <span>HR Portal</span>
+        <i class="ti ti-chevron-right" style="font-size:12px;opacity:0.5"></i>
+        <span style="color:var(--tx);text-transform:capitalize">
+          ${T==='home'?'Tổng quan':T==='emp'?'Nhân viên':T==='pay'?'Bảng lương':T==='leave'?'Nghỉ phép':T==='cal'?'Lịch':T==='rp'?'Báo cáo':T==='att'?'Chấm công':T==='me'?'Hồ sơ':T==='set'?'Cài đặt':'Chi tiết'}
+        </span>
+      </div>
     </div>
-    <div><b>${new Date().toLocaleDateString(LOC(),{weekday:"long",day:"numeric",month:"numeric"})}</b></div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="bell-btn" onclick="toggleNotif()" style="width:32px;height:32px;font-size:16px"><i class="ti ti-bell"></i>${NTF.filter(n=>!n.is_read).length>0?`<span class="bell-dot" style="top:-1px;right:-1px;width:14px;height:14px;font-size:9px">${NTF.filter(n=>!n.is_read).length}</span>`:''}</button>
+      <button class="lang" onclick="setLang(LANG=='en'?'vi':'en')" style="padding:6px 12px;font-size:12px;border-radius:8px"><i class="ti ti-world"></i> ${LANG=="en"?"EN":"VI"}</button>
+    </div>
   </div>
   <div id="notif-panel" class="notif-panel">${NTF.length?NTF.map(n=>`<div class="notif-item ${n.is_read?'':'unread'}"><b>${esc(n.title)}</b><span>${esc(n.content)} · ${new Date(n.created_at).toLocaleDateString()}</span></div>`).join(""):'<p class="mu">Không có thông báo</p>'}</div>
   <main>${MSG?`<p class="${/^Đã /.test(MSG)?"ok":"no"}">${esc(MSG)}</p>`:""}${V[T]()}</main>${cmdbar()}</section></div>`
