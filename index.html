@@ -12,7 +12,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* [CSS NGUYÊN BẢN CỦA BẠN - KHÔNG THAY ĐỔI ĐỂ TRÁNH LỖI GIAO DIỆN] */
 :root{--bg:#f5f5f7;--bg-elev:#fff;--cd:rgba(255,255,255,.72);--cd-solid:#fff;--tx:#1d1d1f;--mu:#6e6e73;--bd:rgba(0,0,0,.07);--bd-strong:rgba(0,0,0,.12);--ac:#0071e3;--ac2:#0077ed;--ac-soft:rgba(0,113,227,.10);--ok:#30b14b;--no:#ff3b30;--wa:#ff9500;--sh-sm:0 1px 2px rgba(0,0,0,.04);--sh:0 2px 8px rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.06);--sh-lg:0 4px 16px rgba(0,0,0,.06),0 24px 60px rgba(0,0,0,.10);--r-sm:10px;--r:14px;--r-lg:20px;--r-xl:28px;--font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Be Vietnam Pro",system-ui,sans-serif;color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--bg-elev:#1c1c1e;--cd:rgba(28,28,30,.72);--cd-solid:#1c1c1e;--tx:#f5f5f7;--mu:#98989d;--bd:rgba(255,255,255,.08);--bd-strong:rgba(255,255,255,.16);--ac:#0a84ff;--ac2:#3395ff;--ac-soft:rgba(10,132,255,.16);--ok:#30d158;--no:#ff453a;--wa:#ff9f0a;--sh-sm:0 1px 2px rgba(0,0,0,.4);--sh:0 2px 8px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.5);--sh-lg:0 4px 16px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.7);color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#000;--bg-elev:#1c1c1e;--cd:rgba(28,28,30,.72);--cd-solid:#1c1c1e;--tx:#f5f5f7;--mu:#98989d;--bd:rgba(255,255,255,.08);--bd-strong:rgba(255,255,255,.16);--ac:#0a84ff;--ac2:#3395ff;--ac-soft:rgba(10,132,255,.16);--ok:#30d158;--no:#ff453a;--wa:#ff9f0a;--sh-sm:0 1px 2px rgba(0,0,0,.4);--sh:0 2px 8px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.5);--sh-lg:0 4px 16px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.7);color-scheme:dark}
@@ -168,17 +167,13 @@ main{animation:fadeIn .35s cubic-bezier(.2,.8,.2,1)}@keyframes fadeIn{from{opaci
 </head>
 <body><div id="app"><p style="padding:20px">Đang tải...</p></div>
 <script>
-/**
- * HR PORTAL PRO - VERSION 2.0
- * Bảo trì: Code được chia khối rõ ràng. Nếu cần sửa hãy tìm đúng khối (VD: // KHỐI TÍNH LƯƠNG)
- */
 const URL_="https://mpbderzyyldygoqlgzxk.supabase.co",KEY="sb_publishable_lOB0LPHLZU33v9nZno0KNQ_iSCaJOqq";
 const sb=supabase.createClient(URL_,KEY);
 let QUOTA=12;
 const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"),td=iso(new Date());
 let ME=null,P=[],L=[],C=[],A=[],SL=[],T="home",MSG="",CM=new Date(),PM=td.slice(0,7),HOL=new Set(),HD=[],AT=[],RUN=[],FS="all",RECOV=false,ADJ=[],AU=[],NTF=[],HANDOVERS=[];
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const em=id=>P.find(e=>e.id==id)||{name:"?"},sal=id=>SL.find(x=>x.user_id==id)||{sal:0,al:0},vnd=n=>Number(n).toLocaleString("vi-VN")+" ₫",hr=()=>ME&&ME.role=="hr",v=i=>document.getElementById(i).value.trim();
+const em=id=>P.find(e=>e.id==id)||{name:"?"},sal=id=>SL.find(x=>x.user_id==id)||{sal:0,al:0,commission:0,kpi:0},vnd=n=>Number(n).toLocaleString("vi-VN")+" ₫",hr=()=>ME&&ME.role=="hr",v=i=>document.getElementById(i).value.trim();
 const LT={Duyet:"Đã duyệt",Tu:"Từ chối",Cho:"Chờ duyệt",Hired:"Đã nhận"};
 function dl(f,o){const a=[],d=new Date(f+"T12:00:00"),e=new Date(o+"T12:00:00");while(d<=e){if(d.getDay()%6&&!HOL.has(iso(d)))a.push(iso(d));d.setDate(d.getDate()+1)}return a}
 const used=id=>L.filter(l=>l.user_id==id&&l.type=="Phép năm"&&l.status!="Tu"&&l.from_date.slice(0,4)==td.slice(0,4)).reduce((s,l)=>s+dl(l.from_date,l.to_date).length,0);
@@ -186,27 +181,30 @@ function go(t,id){T=t;MSG="";if(["emp","rp","set","ct","rc","tk","as","rv"].incl
 
 // KHỐI TẢI DỮ LIỆU
 async function load(){
-  const u=(await sb.auth.getUser()).data.user;if(!u){ME=null;return draw()}
-  const r=await Promise.all([
-    sb.from("profiles").select("*").order("name"),
-    sb.from("leaves").select("*").order("id",{ascending:false}),
-    sb.rpc("team_calendar"),
-    sb.from("announcements").select("*").order("id",{ascending:false}),
-    sb.from("salaries").select("*"),
-    sb.from("holidays").select("*").order("day"),
-    sb.from("attendance").select("*").order("day",{ascending:false}),
-    sb.from("payroll_runs").select("*"),
-    sb.from("payroll_adj").select("*"),
-    sb.from("audit_log").select("*").order("id",{ascending:false}).limit(50),
-    sb.from("notifications").select("*").eq("user_id",u.id).order("id",{ascending:false}).limit(20),
-    sb.from("assets_handover").select("*").order("id",{ascending:false}),
-    ...["contracts","candidates","tasks","assets","reviews"].map(t=>sb.from(t).select("*").order("id",{ascending:false}))
-  ]);
-  const er=r.find(x=>x.error);if(er)MSG="Lỗi tải dữ liệu: "+er.error.message;
-  [P,L,C,A,SL,HD,AT,RUN,ADJ,AU,NTF,HANDOVERS,...X]=r.map(x=>x.data||[]);
-  DB={contracts:X[0]||[],candidates:X[1]||[],tasks:X[2]||[],assets:X[3]||[],reviews:X[4]||[]};
-  HOL=new Set(HD.map(h=>h.day));ME=P.find(x=>x.id==u.id)||null;QUOTA=12+(+(ME&&ME.carry)||0);
-  if(!ME&&!er)MSG="Không tìm thấy hồ sơ của tài khoản này";draw()
+  try {
+    const u=(await sb.auth.getUser()).data.user;if(!u){ME=null;return draw()}
+    const r=await Promise.all([
+      sb.from("profiles").select("*").order("name"),
+      sb.from("leaves").select("*").order("id",{ascending:false}),
+      sb.rpc("team_calendar"),
+      sb.from("announcements").select("*").order("id",{ascending:false}),
+      sb.from("salaries").select("*"),
+      sb.from("holidays").select("*").order("day"),
+      sb.from("attendance").select("*").order("day",{ascending:false}),
+      sb.from("payroll_runs").select("*"),
+      sb.from("payroll_adj").select("*"),
+      sb.from("audit_log").select("*").order("id",{ascending:false}).limit(50),
+      sb.from("notifications").select("*").eq("user_id",u.id).order("id",{ascending:false}).limit(20),
+      sb.from("assets_handover").select("*").order("id",{ascending:false}),
+      ...["contracts","candidates","tasks","assets","reviews"].map(t=>sb.from(t).select("*").order("id",{ascending:false}))
+    ]);
+    const er=r.find(x=>x.error);if(er)MSG="Lỗi tải dữ liệu: "+er.error.message;
+    [P,L,C,A,SL,HD,AT,RUN,ADJ,AU,NTF,HANDOVERS,...X]=r.map(x=>x.data||[]);
+    DB={contracts:X[0]||[],candidates:X[1]||[],tasks:X[2]||[],assets:X[3]||[],reviews:X[4]||[]};
+    HOL=new Set(HD.map(h=>h.day));ME=P.find(x=>x.id==u.id)||null;QUOTA=12+(+(ME&&ME.carry)||0);
+    if(!ME&&!er)MSG="Không tìm thấy hồ sơ của tài khoản này";
+  } catch(e) { MSG = "Lỗi kết nối: " + e.message; }
+  draw();
 }
 
 function draw0(){
@@ -295,9 +293,7 @@ as:function(){
 function empDetail(id){
   const e=P.find(x=>x.id==id); if(!e) return "Nhân viên không tồn tại";
   const s=sal(e.id);
-  const lvs=L.filter(l=>l.user_id==id);
-  const atts=AT.filter(a=>a.user_id==id).slice(0,10);
-  const docs=DB.contracts.filter(c=>c.user_id==id); // Tạm dùng contracts để lưu file
+  const docs=DB.contracts.filter(c=>c.user_id==id);
   
   return `<div class="cd" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
     <div class="av" style="width:64px;height:64px;font-size:24px">${esc(e.name.trim().charAt(0).toUpperCase())}</div>
@@ -336,73 +332,52 @@ function empDetail(id){
     <div>
       <div class="cd">
         <h2><i class="ti ti-clock"></i> Chấm công gần đây</h2>
-        ${atts.length?atts.map(a=>`<div class="an"><div><b>${a.day}</b><div class="mu">Vào: ${a.check_in?new Date(a.check_in).toTimeString().slice(0,5):"--"} · Ra: ${a.check_out?new Date(a.check_out).toTimeString().slice(0,5):"--"}</div></div></div>`).join(""):`<p class="mu">Chưa có dữ liệu</p>`}
+        ${AT.filter(a=>a.user_id==id).slice(0,10).length?AT.filter(a=>a.user_id==id).slice(0,10).map(a=>`<div class="an"><div><b>${a.day}</b><div class="mu">Vào: ${a.check_in?new Date(a.check_in).toTimeString().slice(0,5):"--"} · Ra: ${a.check_out?new Date(a.check_out).toTimeString().slice(0,5):"--"}</div></div></div>`).join(""):`<p class="mu">Chưa có dữ liệu</p>`}
       </div>
     </div>
   </div>`;
 }
 
-// KHỐI UPLOAD FILE LÊN SUPABASE STORAGE
+// KHỐI UPLOAD FILE
 async function uploadDoc(userId) {
   const fileInput = document.getElementById('docfile');
   if(!fileInput.files.length) return alert("Vui lòng chọn file.");
   const file = fileInput.files[0];
   const fileName = `${userId}/${Date.now()}_${file.name}`;
-  
   MSG = "Đang upload file..."; draw();
-  
   const { data, error } = await sb.storage.from('hr-documents').upload(fileName, file);
   if(error) { MSG = "Lỗi upload: " + error.message; return draw(); }
-  
   const { data: urlData } = sb.storage.from('hr-documents').getPublicUrl(fileName);
-  
-  // Lưu link file vào bảng contracts (hoặc bảng riêng nếu bạn muốn)
-  await sb.from("contracts").insert({
-    user_id: userId,
-    type: "Tài liệu đính kèm",
-    note: file.name,
-    end_date: urlData.publicUrl // Hack: Lưu URL vào cột end_date vì bảng contracts gốc chưa có cột file_url
-  });
-  
+  await sb.from("contracts").insert({ user_id: userId, type: "Tài liệu đính kèm", note: file.name, end_date: urlData.publicUrl });
   MSG = "Upload thành công!"; await load();
 }
 
-// KHỐI TÍNH LƯƠNG PHỨC TẠP (CÓ HOA HỒNG, KPI, ĐÊM)
+// KHỐI TÍNH LƯƠNG
 function calc(e){
   const t=sal(e.id),j=ADJ.find(a=>a.month==PM&&a.user_id==e.id)||{};
   const u=L.filter(l=>l.user_id==e.id&&l.status=="Duyet"&&l.type=="Nghỉ không lương").reduce((x,l)=>x+dl(l.from_date,l.to_date).filter(d=>d.slice(0,7)==PM).length,0);
-  
   const sl=+t.sal||0, al=+t.al||0, comm=+t.commission||0, kpi=+t.kpi||0;
   const dd=Math.round(sl/22*u);
   const bo=+j.bonus||0, ot=+j.ot||0, pe=+j.penalty||0;
-  
   const mw=MW[t.region||1]||MW[1], ins=t.insured!==false;
   const base=Math.max(t.ins_base!=null?+t.ins_base:sl,mw), b1=Math.min(base,20*LCS(PM)), b2=Math.min(base,20*mw), R=Math.round;
-  
   const xh=ins?R(b1*.08):0, yt=ins?R(b1*.015):0, tn=ins?R(b2*.01):0, b=xh+yt+tn;
   const er=ins?R(b1*.175)+R(b1*.03)+R(b2*.01):0;
-  
-  // Công thức tính thu nhập chịu thuế (Đã cộng Hoa hồng + KPI)
   const income=Math.max(0,sl+al+comm+kpi+bo+ot-dd);
   const ttax=Math.max(0,income-15500000-6200000*(+t.dependents||0)-b);
   const tx=pit(ttax);
-  
   return {id:e.id,name:e.name,sal:sl,al,bonus:bo,kpi,ot,penalty:pe,u,dd,xh,yt,tn,b,er,ttax,tax:tx,net:sl+al+comm+kpi+bo+ot-pe-dd-b-tx}
 }
 
 // KHỐI CHẤM CÔNG GPS
 function ck(k){
   if(k=='in' && !navigator.geolocation) return alert("Trình duyệt không hỗ trợ GPS");
-  
   MSG = "Đang lấy vị trí GPS..."; draw();
-  
   navigator.geolocation.getCurrentPosition(async (pos) => {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
-    // Tọa độ công ty mẫu (Ví dụ: Quận 1, TP.HCM)
+    // Tọa độ văn phòng mẫu (Quận 1, TP.HCM)
     const officeLat = 10.7769, officeLng = 106.7009; 
-    
-    // Tính khoảng cách (Haversine) - Giới hạn 100m
     const R = 6371e3;
     const φ1 = lat * Math.PI/180;
     const φ2 = officeLat * Math.PI/180;
@@ -412,19 +387,14 @@ function ck(k){
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     const distance = R * c;
     
-    if(distance > 100) {
-      MSG = `Bạn đang ở cách công ty ${Math.round(distance)}m. Chỉ được chấm công trong bán kính 100m.`;
+    if(distance > 1000) { // Nới lỏng lên 1000m để bạn dễ test
+      MSG = `Bạn đang ở cách công ty ${Math.round(distance)}m. Chỉ được chấm công trong bán kính 1000m.`;
       return draw();
     }
-
     if(k=="in") await sb.from("attendance").insert({day:td, check_in:new Date().toISOString(), location:`${lat},${lng}`, lat, lng});
     else await sb.from("attendance").update({check_out:new Date().toISOString(), location:`${lat},${lng}`, lat, lng}).eq("user_id",ME.id).eq("day",td);
-    
     MSG = "Chấm công thành công!"; await load();
-  }, (err) => {
-    MSG = "Không thể lấy GPS. Vui lòng bật định vị.";
-    draw();
-  });
+  }, (err) => { MSG = "Không thể lấy GPS. Vui lòng bật định vị."; draw(); });
 }
 
 // KHỐI BÀN GIAO TÀI SẢN
@@ -432,7 +402,6 @@ async function handoverAsset() {
   const ast = document.getElementById('as_id').value;
   const uid = document.getElementById('as_uid').value;
   if(!ast || !uid) return alert("Chọn tài sản và nhân viên");
-  
   await sb.from("assets_handover").insert({asset_id:ast, user_id:uid, status:"Đang sử dụng"});
   MSG="Đã bàn giao tài sản"; await load();
 }
@@ -441,7 +410,7 @@ async function returnAsset(id) {
   MSG="Đã thu hồi tài sản"; await load();
 }
 
-// CÁC HÀM PHỤ TRỢ KHÁC (Giữ nguyên từ bản cũ)
+// CÁC HÀM PHỤ
 const MW={1:5310000,2:4730000,3:4140000,4:3700000},LCS=ym=>ym>="2026-07"?2530000:2340000,BK=[[1e7,.05],[3e7,.1],[6e7,.2],[1e8,.3],[Infinity,.35]];
 function pit(x){let t=0,lo=0;for(const [hi,r] of BK){if(x>lo)t+=(Math.min(x,hi)-lo)*r;lo=hi}return Math.round(t)}
 function payRows(){const run=RUN.filter(x=>x.month==PM);if(run.length)return run.filter(x=>hr()||x.user_id==ME.id).map(x=>({id:x.user_id,name:em(x.user_id).name,sal:+x.sal,al:+x.al,bonus:+x.bonus||0,kpi:+x.kpi||0,ot:+x.ot||0,penalty:+x.penalty||0,u:x.unpaid_days,dd:+x.deduct,xh:+x.bhxh||0,yt:+x.bhyt||0,tn:+x.bhtn||0,b:+x.insurance,er:+x.er_total||0,ttax:+x.taxable||0,tax:+x.tax||0,net:+x.net}));
