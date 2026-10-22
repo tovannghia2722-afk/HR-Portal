@@ -154,7 +154,7 @@ tbody tr:hover td{background:var(--ac-soft);cursor:default}
 .ic.b{background:linear-gradient(135deg,#0a84ff,#5e5ce6)}.ic.p{background:linear-gradient(135deg,#bf5af2,#5e5ce6)}.ic.n{background:linear-gradient(135deg,#5e5ce6,#3634a3)}.ic.g{background:linear-gradient(135deg,#30d158,#0a9f3a)}.ic.o{background:linear-gradient(135deg,#ff9f0a,#ff6b00)}
 .oa{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:14px}.oa button{border-radius:99px;padding:7px 15px;font-size:13px;font-weight:500}
 .ac4{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:22px;justify-content:center}
-.ac{display:flex;flex-direction:column;justify-content:space-between;gap:22px;text-align:left;min-height:180px;padding:20px;border-radius:var(--r-lg);border:1px solid var(--bd);background:var(--cd-solid);box-shadow:var(--sh-sm);transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s}
+.ac{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;width:100%;gap:22px;text-align:left;min-height:180px;padding:20px;border-radius:var(--r-lg);border:1px solid var(--bd);background:var(--cd-solid);box-shadow:var(--sh-sm);transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s}
 .ac:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:var(--bd-strong)}.ac:active{transform:scale(.98)}
 .acr{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .tile{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;color:#fff;font-size:23px;background:linear-gradient(135deg,var(--tc),color-mix(in srgb,var(--tc) 65%,#000));box-shadow:0 6px 16px color-mix(in srgb,var(--tc) 35%,transparent)}
@@ -621,8 +621,8 @@ const ni=x=>`<button class="ni ${x[0]==T?"on":""}" onclick="go('${x[0]}')"><i cl
 const pl=(ic,tx,act)=>`<button class="ni pl" onclick="${act}"><i class="ti ${ic}"></i>${tx}</button>`;
 function side(){
   if(!hr())MODE="me";
-  const M=[["home","nav_home","ti-home"],["cal","nav_cal","ti-calendar-event"],["leave","nav_leave","ti-file-text"],["att","nav_att","ti-clock"],["pay","nav_pay","ti-cash"],["feedback","Góp ý","ti-message-star"]];
-  const G=[["emp","nav_emp","ti-users"],["ct","nav_ct","ti-file-text"],["rc","nav_rc","ti-user-search"],["tk","nav_tk","ti-list-check"],["as","nav_as","ti-device-laptop"],["rv","nav_rv","ti-star"],["leave","approve_leave","ti-checklist"],["pay","nav_pay","ti-cash"],["rp","nav_rp","ti-chart-bar"],["set","nav_set","ti-settings"],["feedback","Duyệt góp ý","ti-message-star"]];
+  const M=[["home","nav_home","ti-home"],["cal","nav_cal","ti-calendar-event"],["leave","nav_leave","ti-file-text"],["att","nav_att","ti-clock"],["pay","nav_pay","ti-cash"],["feedback","fb_nav","ti-message-star"]];
+  const G=[["emp","nav_emp","ti-users"],["ct","nav_ct","ti-file-text"],["rc","nav_rc","ti-user-search"],["tk","nav_tk","ti-list-check"],["as","nav_as","ti-device-laptop"],["rv","nav_rv","ti-star"],["leave","approve_leave","ti-checklist"],["pay","nav_pay","ti-cash"],["rp","nav_rp","ti-chart-bar"],["set","nav_set","ti-settings"],["feedback","fb_nav_hr","ti-message-star"]];
   const seg=hr()?`<div class="seg"><button class="${MODE=="me"?"on":""}" onclick="setMode('me')"><i class="ti ti-user"></i> ${t("personal")}</button><button class="${MODE=="mg"?"on":""}" onclick="setMode('mg')"><i class="ti ti-briefcase"></i> ${t("manager")}</button></div>`:"";
   return seg+(MODE=="me"?pl("ti-plus",t("hero_leave"),"go('leave')")+pl("ti-user",t("nav_me"),"go('me')")+`<div class="sl">${t("features")}</div>`+M.map(ni).join(""):`<div class="sl">${t("manage_group")}</div>`+G.map(ni).join(""));
 }
