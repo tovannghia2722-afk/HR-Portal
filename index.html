@@ -1066,7 +1066,9 @@ function crud(k){
   return `<div class="cd"><h2><i class="ti ti-briefcase"></i> ${t(c.t)} <span class="badge">${rows.length}</span></h2>${c.top?c.top():""}<div class="f">${c.cols.map(inp).join("")}</div><button class="p" onclick="cadd('${k}')">${t("add")}</button></div>
   <div class="cd"><div class="tw"><table><thead><tr>${c.cols.map(x=>`<th class="${x[2]=="num"?"num":x[2]=="bool"?"mid":""}">${t(x[1])}</th>`).join("")}${actionCol}<th></th></tr></thead><tbody>${rows.map(r=>{let actBtn="";if(k==="candidates"&&r.stage!==t("rc_onboard")&&r.stage!=="Đã nhận")actBtn=`<td class="mid"><button class="p sm" style="background:var(--ok)" onclick="hireCandidate(${r.id},'${esc(r.name)}','${esc(r.email||"")}','${esc(r.position||"")}')"><i class="ti ti-check"></i> ${t("hire_candidate")}</button></td>`;else if(k==="candidates")actBtn=`<td class="mid"><span class="tag Hired">${t("hire_candidate")}</span></td>`;return `<tr>${c.cols.map(x=>`<td class="${x[2]=="num"?"num":x[2]=="bool"?"mid":""}">${cell(r,x)}</td>`).join("")}${actBtn}<td class="mid"><button class="sm" onclick="cdel('${c.tb}',${r.id})">${t("delete")}</button></td></tr>`}).join("")||`<tr><td colspan="${c.cols.length+(actionCol?2:1)}" class="mu">${t("no_data")}</td></tr>`}</tbody></table></div></div>`;
 }
-V.ct=()=>crud("contracts");V.rc = function() {
+V.ct=()=>crud("contracts");
+
+V.rc = function() {
   const cands = DB.candidates || [];
   const newOnes = cands.filter(c => c.stage === "Mới" || !c.stage);
   const done = cands.filter(c => c.stage === "Nhận việc" || c.stage === "Từ chối");
@@ -1117,8 +1119,6 @@ V.ct=()=>crud("contracts");V.rc = function() {
     </div>` : ''}
   </div>`;
 };
-
-// ================= CÁC HÀM XỬ LÝ NÚT BẤM =================
 
 function rejectCand(id) {
   if (!confirm("Bạn có chắc muốn từ chối ứng viên này?")) return;
