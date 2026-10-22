@@ -1986,10 +1986,47 @@ BU.doApprove=async function(id){
 };
 BU.copyCred=async(e,p,btn)=>{await copyText("Email: "+e+"\nPassword: "+p);btn.innerHTML='<i class="ti ti-check"></i> OK'};
 
-syncFab();
-})();
+// Hàm xử lý nút Duyệt từ giao diện mới
+window.BU = window.BU || {};
+BU.approve = async function(id) {
+  const c = DB.candidates.find(x => x.id == id);
+  if (!c) return;
+  
+  const pass = prompt("Tạo tài khoản cho " + c.name + "\nNhập mật khẩu tạm (tối thiểu 6 ký tự):", "123456");
+  if (!pass || pass.length < 6) return alert("Mật khẩu không hợp lệ!");
+  
+  const btn = event.target.closest('button');
+  const oldText = btn.innerHTML;
+  btn.innerHTML = "Đang xử lý...";
+  btn.disabled = true;
 
-readHash();
+  try {
+    const res = await sb.functions.invoke("smart-api", {
+      body: { action: "create", email: c.email, password: pass, name: c.name, role: "nv" }
+    });
+    
+    if (res.error) throw new Error(res.error.message);
+    
+    await sb.from("candidates").update({ 
+      stage: "Nhận việc", 
+      approved_at: new Date().toISOString() 
+    }).eq("id", id);
+    
+    alert(`✅ Đã tạo tài khoản cho ${c.name}\nEmail: ${c.email}\nMật khẩu: ${pass}`);
+    await load();
+    
+  } catch (err) {
+    alert("Lỗi: " + err.message);
+    btn.innerHTML = oldText;
+    btn.disabled = false;
+  }
+};
+
+BU.rejectApp = async function(id) {
+  if (!confirm("Bạn có chắc muốn từ chối ứng viên này?")) return;
+  await sb.from("candidates").update({ stage: "Từ chối" }).eq("id", id);
+  await load();
+};
 sb.auth.getSession().then(load);
 </script>
 </body>
