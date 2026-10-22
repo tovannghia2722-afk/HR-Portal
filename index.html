@@ -84,7 +84,7 @@ main{padding:20px 32px 40px;flex:1;width:100%;max-width:1200px;margin:0 auto}
 .st b{display:block;font-size:30px;font-weight:600;letter-spacing:-.03em;line-height:1.15;margin-top:4px}
 .mu{color:var(--mu);font-size:13px}.no{color:var(--no)}.ok{color:var(--ok)}
 button,select,input,textarea{font:inherit;color:var(--tx);background:var(--cd-solid);border:1px solid var(--bd-strong);border-radius:var(--r-sm);padding:9px 13px;transition:all .18s ease;letter-spacing:-.01em}
-button{cursor:pointer;font-weight:500}
+button{cursor:pointer;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 button:hover:not(:disabled){border-color:var(--bd-strong);background:rgba(120,120,128,.06)}
 button:disabled{opacity:.4;cursor:not-allowed}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 4px var(--ac-soft)}
@@ -373,7 +373,7 @@ const t=(k,args={})=>{
   return String(raw).replace(/\{(\w+)\}/g,(_,x)=>args[x]!==undefined?args[x]:"{"+x+"}");
 };
 
-const ROUTES={home:{view:"home",mgmt:false,icon:"ti-layout-dashboard",title:"title_home"},cal:{view:"cal",mgmt:false,icon:"ti-calendar-event",title:"title_cal"},leave:{view:"leave",mgmt:false,icon:"ti-file-text",title:"title_leave"},att:{view:"att",mgmt:false,icon:"ti-clock",title:"title_att"},pay:{view:"pay",mgmt:false,icon:"ti-cash",title:"title_pay"},me:{view:"me",mgmt:false,icon:"ti-user",title:"title_me"},emp:{view:"emp",mgmt:true,icon:"ti-users",title:"title_emp"},rp:{view:"rp",mgmt:true,icon:"ti-chart-bar",title:"title_rp"},set:{view:"set",mgmt:true,icon:"ti-settings",title:"title_set"},ct:{view:"ct",mgmt:true,icon:"ti-file-invoice",title:"title_ct"},rc:{view:"rc",mgmt:true,icon:"ti-user-search",title:"title_rc"},tk:{view:"tk",mgmt:true,icon:"ti-list-check",title:"title_tk"},as:{view:"as",mgmt:true,icon:"ti-device-laptop",title:"title_as"},rv:{view:"rv",mgmt:true,icon:"ti-star",title:"title_rv"}};
+const ROUTES={feedback:{view:"feedback",mgmt:false,icon:"ti-message-star",title:"Góp ý & Đánh giá"},home:{view:"home",mgmt:false,icon:"ti-layout-dashboard",title:"title_home"},cal:{view:"cal",mgmt:false,icon:"ti-calendar-event",title:"title_cal"},leave:{view:"leave",mgmt:false,icon:"ti-file-text",title:"title_leave"},att:{view:"att",mgmt:false,icon:"ti-clock",title:"title_att"},pay:{view:"pay",mgmt:false,icon:"ti-cash",title:"title_pay"},me:{view:"me",mgmt:false,icon:"ti-user",title:"title_me"},emp:{view:"emp",mgmt:true,icon:"ti-users",title:"title_emp"},rp:{view:"rp",mgmt:true,icon:"ti-chart-bar",title:"title_rp"},set:{view:"set",mgmt:true,icon:"ti-settings",title:"title_set"},ct:{view:"ct",mgmt:true,icon:"ti-file-invoice",title:"title_ct"},rc:{view:"rc",mgmt:true,icon:"ti-user-search",title:"title_rc"},tk:{view:"tk",mgmt:true,icon:"ti-list-check",title:"title_tk"},as:{view:"as",mgmt:true,icon:"ti-device-laptop",title:"title_as"},rv:{view:"rv",mgmt:true,icon:"ti-star",title:"title_rv"}};
 const iconOf=()=>ROUTES[T]?ROUTES[T].icon:"ti-layout-dashboard";
 const titleOf=()=>ROUTES[T]?t(ROUTES[T].title):"";
 
@@ -533,7 +533,58 @@ V.att=function(){
   return `<div class="cd"><h2><i class="ti ti-clock"></i> ${t("today_is",{d:td})}</h2><p class="mu">${t("checkin_at",{a:f(r.check_in),b:f(r.check_out)})}</p><button class="p" onclick="ck('in')" ${r.check_in?"disabled":""}>${t("btn_checkin")}</button> <button onclick="ck('out')" ${!r.check_in||r.check_out?"disabled":""}>${t("btn_checkout")}</button></div>
   <div class="cd"><h2><i class="ti ti-history"></i> ${t("att_history")}</h2><div class="tw"><table><thead><tr><th>${t("col_date")}</th><th>${t("col_employee")}</th><th class="mid">${t("col_in")}</th><th class="mid">${t("col_out")}</th></tr></thead><tbody>${list.map(a=>`<tr><td>${dayLink(a.day)}</td><td>${userLink(a.user_id)}</td><td class="mid">${f(a.check_in)}</td><td class="mid">${f(a.check_out)}</td></tr>`).join("")||`<tr><td colspan="4" class="mu">${t("no_data")}</td></tr>`}</tbody></table></div></div>`;
 };
+V.feedback=function(){
+  if(hr()){
+    return `<div class="cd">
+      <h2><i class="ti ti-message-star"></i> Quản lý Góp ý & Đánh giá</h2>
+      <p class="mu">Danh sách phản hồi từ nhân viên.</p>
+      <div class="tw"><table>
+        <thead><tr><th>Ngày</th><th>Người gửi</th><th>Đánh giá</th><th>Nội dung</th><th>Trạng thái</th></tr></thead>
+        <tbody><tr><td colspan="5" class="mu">(Giao diện demo - mai ráp data thật vào)</td></tr></tbody>
+      </table></div>
+    </div>`;
+  } else {
+    return `<div class="cd" style="max-width:600px;margin:0 auto">
+      <h2 style="justify-content:center"><i class="ti ti-message-star"></i> Gửi Góp ý / Đánh giá</h2>
+      <p class="mu" style="text-align:center;margin-bottom:20px">Ý kiến của bạn giúp công ty phát triển tốt hơn.</p>
+      <div class="f" style="grid-template-columns:1fr">
+        <div>
+          <label class="mu" style="display:block;margin-bottom:8px">Mức độ hài lòng (1-5 sao)</label>
+          <div style="display:flex;gap:8px;font-size:24px;color:var(--wa)">
+            <i class="ti ti-star-filled" style="cursor:pointer"></i>
+            <i class="ti ti-star-filled" style="cursor:pointer"></i>
+            <i class="ti ti-star-filled" style="cursor:pointer"></i>
+            <i class="ti ti-star-filled" style="cursor:pointer"></i>
+            <i class="ti ti-star" style="cursor:pointer"></i>
+          </div>
+        </div>
+        <textarea id="fb_content" placeholder="Nhập ý kiến đóng góp của bạn..." style="min-height:120px"></textarea>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+          <input type="checkbox" id="fb_anon" style="width:18px;height:18px"> 
+          <span>Gửi ẩn danh (Quản lý sẽ không biết bạn là ai)</span>
+        </label>
+      </div>
+      <button class="p" style="width:100%;padding:12px;margin-top:10px" onclick="sendFeedback()">Gửi phản hồi</button>
+    </div>`;
+  }
+};
 
+async function sendFeedback() {
+  const content = document.getElementById("fb_content").value.trim();
+  if(!content) return alert("Vui lòng nhập nội dung góp ý");
+  const anon = document.getElementById("fb_anon").checked;
+  
+  const res = await sb.from("feedback").insert({
+    user_id: ME.id,
+    is_anonymous: anon,
+    rating: 5,
+    content: content
+  });
+  
+  if(res.error) alert("Lỗi: " + res.error.message);
+  else { alert("Cảm ơn bạn đã gửi phản hồi!"); go('home'); }
+}
+  
 V.me=function(){
   return `<div class="cd"><h2><i class="ti ti-user"></i> ${t("profile_title")}</h2><div class="f"><div><span class="mu">${t("fullname")}</span><br>${esc(ME.name)}</div><div><span class="mu">${t("email")}</span><br>${esc(ME.email)}</div><div><span class="mu">${t("dept")}</span><br>${esc(ME.dept)||"—"}</div><div><span class="mu">${t("pos")}</span><br>${esc(ME.pos)||"—"}</div><div><span class="mu">${t("start_date")}</span><br>${ME.start_date||"—"}</div></div><div class="f"><input id="ph" placeholder="${t("phone")}" value="${esc(ME.phone)}"><input id="bd" type="date" value="${ME.birthday||""}"></div><button class="p" onclick="saveMe()">${t("save_info")}</button></div>
   <div class="cd"><h2><i class="ti ti-key"></i> ${t("change_pw")}</h2><div class="f"><input id="np" type="password" placeholder="${t("new_pw")}"><input id="np2" type="password" placeholder="${t("repeat_pw")}"></div><button class="p" onclick="setPw()">${t("change_pw")}</button></div>${mine()}`;
@@ -569,8 +620,8 @@ const ni=x=>`<button class="ni ${x[0]==T?"on":""}" onclick="go('${x[0]}')"><i cl
 const pl=(ic,tx,act)=>`<button class="ni pl" onclick="${act}"><i class="ti ${ic}"></i>${tx}</button>`;
 function side(){
   if(!hr())MODE="me";
-  const M=[["home","nav_home","ti-home"],["cal","nav_cal","ti-calendar-event"],["leave","nav_leave","ti-file-text"],["att","nav_att","ti-clock"],["pay","nav_pay","ti-cash"]];
-  const G=[["emp","nav_emp","ti-users"],["ct","nav_ct","ti-file-text"],["rc","nav_rc","ti-user-search"],["tk","nav_tk","ti-list-check"],["as","nav_as","ti-device-laptop"],["rv","nav_rv","ti-star"],["leave","approve_leave","ti-checklist"],["pay","nav_pay","ti-cash"],["rp","nav_rp","ti-chart-bar"],["set","nav_set","ti-settings"]];
+  const M=[["home","nav_home","ti-home"],["cal","nav_cal","ti-calendar-event"],["leave","nav_leave","ti-file-text"],["att","nav_att","ti-clock"],["pay","nav_pay","ti-cash"],["feedback","Góp ý","ti-message-star"]];
+  const G=[["emp","nav_emp","ti-users"],["ct","nav_ct","ti-file-text"],["rc","nav_rc","ti-user-search"],["tk","nav_tk","ti-list-check"],["as","nav_as","ti-device-laptop"],["rv","nav_rv","ti-star"],["leave","approve_leave","ti-checklist"],["pay","nav_pay","ti-cash"],["rp","nav_rp","ti-chart-bar"],["set","nav_set","ti-settings"],["feedback","Duyệt góp ý","ti-message-star"]];
   const seg=hr()?`<div class="seg"><button class="${MODE=="me"?"on":""}" onclick="setMode('me')"><i class="ti ti-user"></i> ${t("personal")}</button><button class="${MODE=="mg"?"on":""}" onclick="setMode('mg')"><i class="ti ti-briefcase"></i> ${t("manager")}</button></div>`:"";
   return seg+(MODE=="me"?pl("ti-plus",t("hero_leave"),"go('leave')")+pl("ti-user",t("nav_me"),"go('me')")+`<div class="sl">${t("features")}</div>`+M.map(ni).join(""):`<div class="sl">${t("manage_group")}</div>`+G.map(ni).join(""));
 }
