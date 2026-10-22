@@ -314,15 +314,209 @@ tbody tr:hover td{background:var(--ac-soft);cursor:default}
   .hero .hero-greet h2 { font-size: 24px; }
   .hero .hero-corner { justify-self: start; }
 }
-.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35) 0%,rgba(255,255,255,0) 60%);pointer-events:none}
-.hero>*{position:relative;z-index:1}
-.hero h2{font-size:28px;margin:0;color:#fff;font-weight:600;letter-spacing:-.03em;border:0;padding:0}
-.hero h2::before{display:none}
-.hero p{margin:6px 0 0;opacity:.85;color:#fff;font-size:14px;text-transform:capitalize}
-.hb{display:flex;gap:10px;flex-wrap:wrap}
-.hb button{border-radius:99px;padding:10px 20px;font-weight:500;font-size:14px}
-.wh{background:#fff;color:#0071e3;border-color:transparent;box-shadow:0 2px 8px rgba(0,0,0,.15)}.wh:hover{background:#f5f5f7}
-.gl{background:rgba(255,255,255,.18);color:#fff;border-color:rgba(255,255,255,.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}.gl:hover{background:rgba(255,255,255,.28)}
+/* ========== HERO — PHƯƠNG ÁN C (ĐƯỜNG CHÉO TRÔI, NHẸ MẮT) ========== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  min-height: 260px;
+  padding: 32px 40px;
+  margin-bottom: 22px;
+  color: #fff;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "greet  clock"
+    "action corner";
+  gap: 20px 24px;
+  align-items: start;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d2a55 50%, #3d2a4a 100%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.15) inset,
+    0 10px 40px -10px rgba(30,58,95,.6),
+    0 30px 80px -20px rgba(45,42,85,.5);
+  border: 1px solid rgba(255,255,255,.10);
+}
+
+/* Lớp lưới tech mờ */
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 90% at 50% 50%, #000 20%, transparent 75%);
+          mask-image: radial-gradient(ellipse 70% 90% at 50% 50%, #000 20%, transparent 75%);
+  pointer-events: none; z-index: 1;
+}
+
+/* Đường kẻ chéo trôi chậm */
+.hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 40px,
+      rgba(255,255,255,.045) 40px,
+      rgba(255,255,255,.045) 41px
+    );
+  background-size: 200% 200%;
+  animation: lineScroll 24s linear infinite;
+  pointer-events: none; z-index: 2;
+  -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, #000 30%, transparent 80%);
+          mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, #000 30%, transparent 80%);
+}
+@keyframes lineScroll {
+  from { background-position: 0 0; }
+  to   { background-position: 100px 100px; }
+}
+
+.hero > * { position: relative; z-index: 3; }
+
+/* Cụm 1 — Lời chào */
+.hero .hero-greet { grid-area: greet; align-self: start; min-width: 0; }
+.hero .hero-greet h2 {
+  font-size: 34px; margin: 0; font-weight: 700; letter-spacing: -.03em;
+  line-height: 1.15; border: 0; padding: 0;
+  background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,.82) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,.25));
+}
+.hero .hero-greet h2::before { display: none; }
+.hero .hero-greet .hero-date {
+  margin: 10px 0 0; color: rgba(255,255,255,.85);
+  font-size: 14px; font-weight: 500; letter-spacing: -.01em;
+}
+
+/* Cụm 2 — Đồng hồ + thời tiết */
+.hero .hero-clock {
+  grid-area: clock; text-align: right; align-self: start;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+}
+.hero .hero-clock .clk-big {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, monospace;
+  font-variant-numeric: tabular-nums; font-weight: 600;
+  letter-spacing: .01em; font-size: 28px; line-height: 1; color: #fff;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.2));
+}
+.hero .hero-clock .clk-big::before {
+  content: ""; width: 8px; height: 8px; border-radius: 50%;
+  background: #30d158;
+  animation: livePulse 2s ease-out infinite;
+}
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(48,209,88,.6); }
+  100% { box-shadow: 0 0 0 10px rgba(48,209,88,0); }
+}
+.hero .hero-clock #weather {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 99px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  font-size: 13px; color: #fff; white-space: nowrap;
+}
+
+/* Cụm 3 — Nút bấm */
+.hero .hb { grid-area: action; align-self: end; display: flex; gap: 10px; flex-wrap: wrap; }
+.hb button {
+  border-radius: 99px; padding: 11px 22px; font-weight: 600; font-size: 14px;
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  transition: all .3s cubic-bezier(.2,.8,.2,1); letter-spacing: -.01em;
+}
+.wh {
+  background: rgba(255,255,255,.96); color: #0a84ff;
+  border-color: rgba(255,255,255,.9);
+  box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 4px 14px rgba(0,0,0,.12);
+}
+.wh:hover {
+  background: #fff; transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 8px 24px rgba(0,0,0,.18);
+}
+.wh:active { transform: translateY(0) scale(.98); }
+.gl {
+  background: rgba(255,255,255,.12); color: #fff;
+  box-shadow: 0 1px 0 rgba(255,255,255,.15) inset;
+}
+.gl:hover {
+  background: rgba(255,255,255,.22); transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255,255,255,.20) inset, 0 8px 24px rgba(0,0,0,.15);
+}
+.gl:active { transform: translateY(0) scale(.98); }
+
+/* Cụm 4 — Live Team Status (Phương án B) */
+.hero .hero-corner {
+  grid-area: corner; align-self: end; justify-self: end;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 16px 10px 12px; border-radius: 16px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  color: #fff; cursor: pointer;
+  transition: all .25s cubic-bezier(.2,.8,.2,1);
+}
+.hero .hero-corner:hover { background: rgba(255,255,255,.14); transform: translateY(-2px); }
+.hero .avatar-stack { display: flex; align-items: center; }
+.hero .mini-av {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, #0a84ff, #5e5ce6);
+  color: #fff; font-size: 11.5px; font-weight: 700;
+  display: grid; place-items: center;
+  border: 2px solid rgba(255,255,255,.6);
+  margin-left: -8px; flex: none;
+  transition: transform .2s, z-index 0s, margin-left .2s;
+  position: relative;
+}
+.hero .mini-av:first-child { margin-left: 0; }
+.hero .mini-av:hover {
+  transform: translateY(-4px) scale(1.1);
+  z-index: 10; margin-left: -2px; margin-right: 6px;
+}
+.hero .mini-av.more {
+  background: rgba(255,255,255,.20); color: #fff;
+  font-size: 10.5px; border-color: rgba(255,255,255,.45);
+}
+.hero .mini-av::after {
+  content: ""; position: absolute; bottom: -1px; right: -1px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #30d158; border: 2px solid rgba(255,255,255,.9);
+}
+.hero .corner-text .corner-label {
+  font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: rgba(255,255,255,.7);
+  line-height: 1.3; margin-bottom: 2px;
+}
+.hero .corner-text .corner-value {
+  font-size: 15px; font-weight: 700; color: #fff;
+  line-height: 1.2; font-variant-numeric: tabular-nums;
+}
+.hero .corner-text .corner-value .muted {
+  color: rgba(255,255,255,.5); font-weight: 600; font-size: 13px;
+}
+
+/* Responsive */
+@media(max-width: 720px) {
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "greet" "clock" "action" "corner";
+    padding: 28px 24px; min-height: 0; gap: 16px; align-items: start;
+  }
+  .hero .hero-clock { text-align: left; align-items: flex-start; }
+  .hero .hero-clock .clk-big { font-size: 22px; }
+  .hero .hero-greet h2 { font-size: 24px; }
+  .hero .hero-corner { justify-self: start; }
+}
 .row{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}
 .an{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--bd)}
 .an:last-child{border-bottom:0}.an>div{flex:1;min-width:0}.an b{font-size:14px;font-weight:500}
