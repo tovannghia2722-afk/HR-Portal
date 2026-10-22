@@ -681,11 +681,40 @@ const V={};
 
 V.home=function(){
   const p=L.filter(l=>l.status=="Cho"&&(hr()||l.user_id==ME.id)).length;
-  const o=C.filter(l=>l.status=="Duyet"&&dl(l.from_date,l.to_date).includes(td)).map(l=>l.name);
+  const offToday=C.filter(l=>l.status=="Duyet"&&dl(l.from_date,l.to_date).includes(td));
+  const o=offToday.map(l=>l.name);
   const u=used(ME.id),rem=QUOTA-u,hh=new Date().getHours();
   const g=hh<11?t("greet_morning"):hh<18?t("greet_afternoon"):t("greet_evening");
   const fn=ME.name.trim().split(" ").pop(),cc=2*Math.PI*34;
-  return `<div class="hero"><div class="hh"><div><h2>${g}, ${esc(fn)}</h2><p>${new Date().toLocaleDateString(LOC(),{weekday:"long",day:"numeric",month:"numeric",year:"numeric"})}</p></div><div class="clk"><b id="clk2"></b><div id="weather" class="mu" style="color:rgba(255,255,255,.9);font-size:14px;margin-top:4px">📍 TP.HCM</div></div></div><div class="hb"><button class="wh" onclick="go('leave')"><i class="ti ti-plane-departure"></i> ${t("hero_leave")}</button><button class="gl" onclick="go('cal')"><i class="ti ti-calendar-event"></i> ${t("hero_viewcal")}</button></div></div>
+  const workingNow = P.length - offToday.length;
+  const offNames = offToday.map(l=>em(l.user_id).name.split(" ").pop()).join(", ");
+  const showcase = P.slice(0,3);
+  const moreCount = Math.max(0, P.length - 3);
+  const tooltip = `${workingNow} người đang làm việc · ${offToday.length} người nghỉ${offNames?' ('+offNames+')':''}`;
+  return `<div class="hero">
+  <div class="hero-greet">
+    <h2>${g}, ${esc(fn)}</h2>
+    <p class="hero-date">${new Date().toLocaleDateString(LOC(),{weekday:"long",day:"numeric",month:"numeric",year:"numeric"})}</p>
+  </div>
+  <div class="hero-clock">
+    <b class="clk-big" id="clk2"></b>
+    <div id="weather">📍 ${t("city")}</div>
+  </div>
+  <div class="hb">
+    <button class="wh" onclick="go('leave')"><i class="ti ti-plane-departure"></i> ${t("hero_leave")}</button>
+    <button class="gl" onclick="go('cal')"><i class="ti ti-calendar-event"></i> ${t("hero_viewcal")}</button>
+  </div>
+  <div class="hero-corner" title="${esc(tooltip)}" onclick="go('emp')">
+    <div class="avatar-stack">
+      ${showcase.map(e=>`<span class="mini-av">${esc(e.name.trim().charAt(0).toUpperCase())}</span>`).join("")}
+      ${moreCount?`<span class="mini-av more">+${moreCount}</span>`:""}
+    </div>
+    <div class="corner-text">
+      <div class="corner-label">Đang làm việc</div>
+      <div class="corner-value">${workingNow}<span class="muted">/${P.length} người</span></div>
+    </div>
+  </div>
+</div>
   ${oneTap()}${cards()}
   <div class="row"><div><div class="g">
     <div class="cd st"><svg width="84" height="84" viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="var(--bd)" stroke-width="8"/><circle cx="42" cy="42" r="34" fill="none" stroke="var(--ac)" stroke-width="8" stroke-linecap="round" stroke-dasharray="${cc}" stroke-dashoffset="${cc*(1-rem/QUOTA)}" transform="rotate(-90 42 42)"/><text x="42" y="47" text-anchor="middle" font-size="15" font-weight="600" fill="currentColor">${rem}/${QUOTA}</text></svg><div><b style="font-size:15px">${t("leave_left")}</b><div class="mu">${t("leave_used",{n:u})}</div></div></div>
