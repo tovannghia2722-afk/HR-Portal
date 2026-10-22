@@ -1066,7 +1066,49 @@ function crud(k){
   return `<div class="cd"><h2><i class="ti ti-briefcase"></i> ${t(c.t)} <span class="badge">${rows.length}</span></h2>${c.top?c.top():""}<div class="f">${c.cols.map(inp).join("")}</div><button class="p" onclick="cadd('${k}')">${t("add")}</button></div>
   <div class="cd"><div class="tw"><table><thead><tr>${c.cols.map(x=>`<th class="${x[2]=="num"?"num":x[2]=="bool"?"mid":""}">${t(x[1])}</th>`).join("")}${actionCol}<th></th></tr></thead><tbody>${rows.map(r=>{let actBtn="";if(k==="candidates"&&r.stage!==t("rc_onboard")&&r.stage!=="Đã nhận")actBtn=`<td class="mid"><button class="p sm" style="background:var(--ok)" onclick="hireCandidate(${r.id},'${esc(r.name)}','${esc(r.email||"")}','${esc(r.position||"")}')"><i class="ti ti-check"></i> ${t("hire_candidate")}</button></td>`;else if(k==="candidates")actBtn=`<td class="mid"><span class="tag Hired">${t("hire_candidate")}</span></td>`;return `<tr>${c.cols.map(x=>`<td class="${x[2]=="num"?"num":x[2]=="bool"?"mid":""}">${cell(r,x)}</td>`).join("")}${actBtn}<td class="mid"><button class="sm" onclick="cdel('${c.tb}',${r.id})">${t("delete")}</button></td></tr>`}).join("")||`<tr><td colspan="${c.cols.length+(actionCol?2:1)}" class="mu">${t("no_data")}</td></tr>`}</tbody></table></div></div>`;
 }
-V.ct=()=>crud("contracts");V.rc=()=>crud("candidates");V.tk=()=>crud("tasks");V.as=()=>crud("assets");V.rv=()=>crud("reviews");
+V.ct=()=>crud("contracts");V.rc = function() {
+  // Lấy danh sách ứng viên
+  const cands = DB.candidates || [];
+  const newOnes = cands.filter(c => c.stage === "Mới" || !c.stage);
+  const done = cands.filter(c => c.stage === "Nhận việc" || c.stage === "Từ chối");
+
+  // Giao diện thẻ ứng viên
+  const card = (c) => `
+    <div class="cand-card" style="border:1px solid var(--bd);padding:16px;border-radius:12px;margin-bottom:12px;background:var(--cd-solid)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+        <div><b style="font-size:16px">${esc(c.name)}</b> <span class="tag Cho" style="font-size:11px">${c.position || 'Ứng viên'}</span></div>
+        <span class="tag ${c.stage==='Nhận việc'?'Duyet':c.stage==='Từ chối'?'Tu':'Cho'}">${c.stage || 'Mới'}</span>
+      </div>
+      <div style="font-size:13px;color:var(--mu);margin-bottom:12px;display:flex;gap:16px;flex-wrap:wrap">
+        ${c.email ? `<span>✉️ ${esc(c.email)}</span>` : ''}
+        ${c.phone ? `<span>📱 ${esc(c.phone)}</span>` : ''}
+        ${c.dept_wish ? `<span>🏢 ${esc(c.dept_wish)}</span>` : ''}
+      </div>
+      <div style="display:flex;gap:8px;border-top:1px solid var(--bd);padding-top:12px">
+        ${c.stage === "Mới" || !c.stage ? `
+          <button class="p sm" onclick="openApprove('${c.id}')"><i class="ti ti-check"></i> Duyệt & Tạo TK</button>
+          <button class="sm" onclick="rejectCand('${c.id}')"><i class="ti ti-x"></i> Từ chối</button>
+        ` : ''}
+        <button class="sm" style="margin-left:auto;color:var(--no)" onclick="delCand('${c.id}')"><i class="ti ti-trash"></i></button>
+      </div>
+    </div>
+  `;
+
+  return `<div class="cd">
+    <h2><i class="ti ti-user-search"></i> Tuyển dụng <span class="badge">${cands.length}</span></h2>
+    <p class="mu">Duyệt ứng viên để hệ thống tự tạo tài khoản, profile và email mời.</p>
+    
+    <div style="margin-top:20px">
+      <h3 style="font-size:14px;color:var(--mu);text-transform:uppercase;margin-bottom:12px">🟡 Chờ duyệt (${newOnes.length})</h3>
+      ${newOnes.length ? newOnes.map(card).join("") : `<p class="mu">Chưa có ứng viên mới nào.</p>`}
+    </div>
+
+    ${done.length ? `<div style="margin-top:20px">
+      <h3 style="font-size:14px;color:var(--mu);text-transform:uppercase;margin-bottom:12px">🟢 Đã xử lý (${done.length})</h3>
+      ${done.map(card).join("")}
+    </div>` : ''}
+  </div>`;
+};V.tk=()=>crud("tasks");V.as=()=>crud("assets");V.rv=()=>crud("reviews");
 
 function cards(){
   const r=AT.find(a=>a.user_id==ME.id&&a.day==td)||{},f=x=>new Date(x).toTimeString().slice(0,5),pend=L.filter(l=>l.status=="Cho"&&(hr()||l.user_id==ME.id)).length,off=C.filter(l=>l.status=="Duyet"&&dl(l.from_date,l.to_date).includes(td)).length;
