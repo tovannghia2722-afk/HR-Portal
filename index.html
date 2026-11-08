@@ -28,10 +28,12 @@
 :root{--bg:#f5f5f7;--bg-elev:#fff;--cd:rgba(255,255,255,.72);--cd-solid:#fff;--tx:#1d1d1f;--mu:#6e6e73;--bd:rgba(0,0,0,.07);--bd-strong:rgba(0,0,0,.12);--ac:#0071e3;--ac2:#0077ed;--ac-soft:rgba(0,113,227,.10);--ok:#30b14b;--no:#ff3b30;--wa:#ff9500;--sh-sm:0 1px 2px rgba(0,0,0,.04);--sh:0 2px 8px rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.06);--sh-lg:0 4px 16px rgba(0,0,0,.06),0 24px 60px rgba(0,0,0,.10);--r-sm:10px;--r:14px;--r-lg:20px;--r-xl:28px;--font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Be Vietnam Pro",system-ui,sans-serif;color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--bg-elev:#1c1c1e;--cd:rgba(28,28,30,.72);--cd-solid:#1c1c1e;--tx:#f5f5f7;--mu:#98989d;--bd:rgba(255,255,255,.08);--bd-strong:rgba(255,255,255,.16);--ac:#0a84ff;--ac2:#3395ff;--ac-soft:rgba(10,132,255,.16);--ok:#30d158;--no:#ff453a;--wa:#ff9f0a;--sh-sm:0 1px 2px rgba(0,0,0,.4);--sh:0 2px 8px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.5);--sh-lg:0 4px 16px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.7);color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#000;--bg-elev:#1c1c1e;--cd:rgba(28,28,30,.72);--cd-solid:#1c1c1e;--tx:#f5f5f7;--mu:#98989d;--bd:rgba(255,255,255,.08);--bd-strong:rgba(255,255,255,.16);--ac:#0a84ff;--ac2:#3395ff;--ac-soft:rgba(10,132,255,.16);--ok:#30d158;--no:#ff453a;--wa:#ff9f0a;--sh-sm:0 1px 2px rgba(0,0,0,.4);--sh:0 2px 8px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.5);--sh-lg:0 4px 16px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.7);color-scheme:dark}
-/* Ẩn icon 3D ở giữa màn hình đăng nhập */
-.orbw, .lgx-art {
+/* Chỉ ẩn đúng cái icon 3D/orb ở giữa màn hình */
+.orbw {
   display: none !important;
 }
+
+/* Đảm bảo khung hiển thị layout grid không bị mất cột */
 .lgx {
   grid-template-columns: 1fr !important;
 }
