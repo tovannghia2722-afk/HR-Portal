@@ -12,7 +12,7 @@
      ║                                   công thức), "hx-law", "hx-payroll" ║
      ║  6/6 CÔNG VIỆC · OKR · LƯU TRỮ   : "hx-work","hx-extra","hx-extra2","hx-wire"║
      ╚══════════════════════════════════════════════════════════════════╝ -->
-<meta name="hr-build" content="2026-11-13.1">
+<meta name="hr-build" content="2026-11-14.1">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
@@ -1022,27 +1022,24 @@ main{overflow-x:clip}h1,h2,h3,h4,p,td,th,label,summary,.mu,.tag,.an,.qa{overflow
 @media(max-width:560px){.hr-home-hero{padding:20px 17px 18px 21px!important;border-radius:17px!important}.hr-home-title{font-size:25px!important}.hr-home-meta{align-items:stretch}.hr-code-pill{width:100%;box-sizing:border-box}.hr-home-team{width:100%;box-sizing:border-box}.hr-home-side{gap:10px!important}.hr-workspace-card{padding:11px;gap:10px}.hr-workspace-card-icon{width:38px;height:38px;flex-basis:38px;border-radius:11px}.hr-workspace-card-copy strong{font-size:14px}.hr-workspace-card-copy small{font-size:10px}.tb-workspace span{display:none!important}.tb-workspace{width:36px!important;padding:0!important;justify-content:center!important}}
 @media(prefers-reduced-motion:reduce){.hr-workspace-card,.tb-workspace{transition:none!important}.hr-workspace-card:hover,.tb-workspace:hover{transform:none!important}}
 
-/* ═══ BẢNG: MÀU DỊU ĐỒNG BỘ · CUỘN NGANG · ĐÓNG BĂNG ═══ */
-table th{background:color-mix(in srgb,var(--ac,#0a84ff) 13%,var(--cd-solid,#fff)) !important;color:var(--tx) !important;text-transform:none !important;font-weight:700 !important;font-size:12.5px !important;letter-spacing:0 !important;border-bottom:1px solid color-mix(in srgb,var(--ac,#0a84ff) 25%,var(--bd)) !important}
-table td{border-bottom:1px solid color-mix(in srgb,var(--bd) 75%,transparent)}
+/* ═══ BẢNG: GIỮ XANH ĐẬM HỆ THỐNG · CUỘN NGANG · ĐÓNG BĂNG ═══ */
 table tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--ac,#0a84ff) 3%,var(--cd-solid,#fff))}
 table tbody tr:hover td{background:color-mix(in srgb,var(--ac,#0a84ff) 8%,var(--cd-solid,#fff))}
 table tfoot td,table tr.tp-total td{background:color-mix(in srgb,var(--ac,#0a84ff) 14%,var(--cd-solid,#fff)) !important;font-weight:700}
 .hr-col-filter-row th{background:var(--cd-solid,#fff) !important}
-.pstd th.gh{background:color-mix(in srgb,var(--ac,#0a84ff) 22%,var(--cd-solid,#fff)) !important}
-.pstd th.ix,.pstd th.fx{background:color-mix(in srgb,var(--ac,#0a84ff) 7%,var(--cd-solid,#fff)) !important;color:var(--mu) !important}
-.pstd tr.sd td,.pstd tr.sd td.frz{background:color-mix(in srgb,var(--ac,#0a84ff) 16%,var(--cd-solid,#fff))}
-.pstd tr.gt td{background:color-mix(in srgb,var(--ac,#0a84ff) 24%,var(--cd-solid,#fff))}
-.main,.page,.hx-wrap,.cd,.hxg,.pstd{min-width:0;max-width:100%}
+/* gốc lỗi: phần tử con của lưới/flex tự giãn theo bảng → không còn thanh cuộn */
+.main,.page,.hx-wrap,.cd,.hxg,.pstd,#pay-std{min-width:0;max-width:100%}
+.hx-wrap>*,.cd>*,.main>*,.page>*{min-width:0;max-width:100%}
 .tw{overflow:visible !important;max-height:none !important}
-.tw-auto,.hxg-w,.pstd{overflow:auto !important;max-width:100%;width:100%;max-height:75vh;overscroll-behavior:contain;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
-.tw-auto::-webkit-scrollbar,.hxg-w::-webkit-scrollbar,.pstd::-webkit-scrollbar{height:11px;width:11px}
-.tw-auto::-webkit-scrollbar-thumb,.hxg-w::-webkit-scrollbar-thumb,.pstd::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--ac,#0a84ff) 40%,#999);border-radius:8px}
+.tw-auto,.hxg-w,.pstd{overflow:auto !important;max-width:100%;width:100%;max-height:75vh;contain:inline-size;overscroll-behavior:contain;scrollbar-width:auto;-webkit-overflow-scrolling:touch}
+.tw-auto::-webkit-scrollbar,.hxg-w::-webkit-scrollbar,.pstd::-webkit-scrollbar{height:12px;width:12px}
+.tw-auto::-webkit-scrollbar-thumb,.hxg-w::-webkit-scrollbar-thumb,.pstd::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--ac,#0a84ff) 55%,#777);border-radius:8px}
+.tw-auto::-webkit-scrollbar-track,.hxg-w::-webkit-scrollbar-track,.pstd::-webkit-scrollbar-track{background:color-mix(in srgb,var(--ac,#0a84ff) 8%,transparent)}
 .tw-auto thead th,.tw-auto th{position:sticky;top:0;z-index:3}
 .tw-auto tfoot td,.tw-auto tr.tp-total td{position:sticky;bottom:0;z-index:2}
 .tw-auto.tp-grab{cursor:grab}.tw-auto.tp-grabbing{cursor:grabbing;user-select:none}
 .tp-fz{position:sticky !important;z-index:2;background:var(--cd-solid,#fff);box-shadow:1px 0 0 var(--bd)}
-th.tp-fz{z-index:5 !important;background:color-mix(in srgb,var(--ac,#0a84ff) 13%,var(--cd-solid,#fff)) !important}
+th.tp-fz{z-index:5 !important;background:var(--ac,#0a84ff) !important}
 table tbody tr:nth-child(even) td.tp-fz{background:color-mix(in srgb,var(--ac,#0a84ff) 3%,var(--cd-solid,#fff))}
 table tbody tr:hover td.tp-fz{background:color-mix(in srgb,var(--ac,#0a84ff) 8%,var(--cd-solid,#fff))}
 </style>
@@ -7722,7 +7719,7 @@ function render(id){const s=ST[id];if(!s)return;const box=document.getElementByI
   const qi=box.querySelector('.hxg-q input');if(s.focusQ&&qi){qi.focus();qi.setSelectionRange(qi.value.length,qi.value.length)}
   const fi=s.focusF&&box.querySelector(`tr.flt input[oninput*="'${s.focusF}'"]`);if(fi){fi.focus();fi.setSelectionRange(fi.value.length,fi.value.length)}
 }
-function fixSticky(box,frz,sel){const h=box.querySelector('thead tr');if(!h)return;const hs=[...h.children];let left=0;const L=[];for(let i=0;i<frz;i++){const th=hs[sel+i];if(!th)break;L.push(left);left+=th.offsetWidth}
+function fixSticky(box,frz,sel){const w0=box.querySelector('.hxg-w');if(w0&&window.hxClamp)window.hxClamp(w0);const h=box.querySelector('thead tr');if(!h)return;const hs=[...h.children];let left=0;const L=[];for(let i=0;i<frz;i++){const th=hs[sel+i];if(!th)break;L.push(left);left+=th.offsetWidth}
   box.querySelectorAll('tr').forEach(tr=>{L.forEach((x,i)=>{const c=tr.children[sel+i];if(c&&c.classList.contains('frz'))c.style.left=x+'px'})});
   const fr=box.querySelector('tr.flt');if(fr){const hh=h.offsetHeight;[...fr.children].forEach(c=>c.style.top=hh+'px')}}
 let rt=null;const later=id=>{clearTimeout(rt);rt=setTimeout(()=>render(id),120)};
@@ -8213,14 +8210,14 @@ function tabRules(){const keys=['region_min_wage_1','region_min_wage_2','region_
 .pstd{overflow:auto;border:1px solid var(--bd);border-radius:14px;max-height:72vh;background:var(--cd-solid,#fff)}
 .pstd table{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%;font:inherit;font-size:13px}
 .pstd th,.pstd td{border-right:1px solid color-mix(in srgb,var(--bd) 80%,transparent);border-bottom:1px solid color-mix(in srgb,var(--bd) 80%,transparent);padding:7px 9px;white-space:normal;vertical-align:middle;line-height:1.35}
-.pstd th{position:sticky;background:color-mix(in srgb,var(--ac,#0a84ff) 9%,var(--cd-solid,#fff)) !important;color:var(--tx) !important;text-transform:none !important;font-weight:700 !important;text-align:center !important;font-size:12px !important;letter-spacing:0 !important}
-.pstd th.gh{background:color-mix(in srgb,var(--ac,#0a84ff) 16%,var(--cd-solid,#fff)) !important;font-size:12.5px !important;text-transform:uppercase !important}
-.pstd th.ix,.pstd th.fx{font-weight:400 !important;font-style:italic;font-size:11px !important;color:var(--mu) !important}
+.pstd th{position:sticky;background:var(--ac,#0a84ff) !important;color:#fff !important;text-transform:none !important;font-weight:700 !important;text-align:center !important;font-size:12px !important;letter-spacing:0 !important}
+.pstd th.gh{background:color-mix(in srgb,var(--ac,#0a84ff) 72%,#000) !important;color:#fff !important;font-size:12.5px !important;text-transform:uppercase !important}
+.pstd th.ix,.pstd th.fx{font-weight:400 !important;font-style:italic;font-size:11px !important;color:rgba(255,255,255,.9) !important;background:color-mix(in srgb,var(--ac,#0a84ff) 88%,#000) !important}
 .pstd td{text-align:right}.pstd td.l{text-align:left}.pstd td.c{text-align:center}.pstd td.n{white-space:nowrap}
 .pstd .frz{position:sticky;z-index:2;background:var(--cd-solid,#fff);box-shadow:1px 0 0 var(--bd)}
-.pstd th.frz{z-index:4;background:color-mix(in srgb,var(--ac,#0a84ff) 9%,var(--cd-solid,#fff)) !important}
-.pstd tr.sd td{background:color-mix(in srgb,#ff9500 22%,var(--cd-solid,#fff));font-weight:700}
-.pstd tr.sd td.frz{background:color-mix(in srgb,#ff9500 22%,var(--cd-solid,#fff))}
+.pstd th.frz{z-index:4}
+.pstd tr.sd td{background:color-mix(in srgb,#ff9500 22%,var(--cd-solid,#fff)) !important;font-weight:700}
+.pstd tr.sd td.frz{background:color-mix(in srgb,#ff9500 22%,var(--cd-solid,#fff)) !important}
 .pstd tr.gt td{background:color-mix(in srgb,var(--ac,#0a84ff) 14%,var(--cd-solid,#fff));font-weight:800;position:sticky;bottom:0;z-index:3}
 .pstd tr.rd td{color:#c5221f}.pstd tr.xx td{background:color-mix(in srgb,#ff3b30 10%,var(--cd-solid,#fff))}
 .pstd tr:not(.sd):not(.gt):hover td{background:color-mix(in srgb,var(--ac,#0a84ff) 6%,var(--cd-solid,#fff))}`;document.head.appendChild(st)})();
@@ -8255,7 +8252,7 @@ function stdHtml(rows){const cols=stdCols(),B=stdBuild(rows),collapsed=PS.col||(
     h+=`<tr class="sd" onclick="hx.payStdFold('${E(d).replace(/'/g,'&#39;')}')" style="cursor:pointer">${cols.map((c,i)=>i===0?`<td class="c ${stdFz()>0?'frz':''}">${lt}</td>`:i===1?`<td class="l ${stdFz()>1?'frz':''}">${cl?'▸':'▾'} ${E(d)} <span style="font-weight:400;opacity:.7">(${arr.length})</span></td>`:`<td class="${c.t==='m'||c.t==='d'?'n':'c'}">${c.s?fmtS(c,sm[c.k]):''}</td>`).join('')}</tr>`;
     if(!cl)arr.forEach(r=>{n++;h+=`<tr class="${isOut(r)?'rd':''} ${/nghỉ/i.test(r.status_label||'')?'xx':''}">${cols.map((c,i)=>{const v=c.k==='stt'?n:c.k==='name'?r.name:B.val(r,c.k);const nm=c.k==='name'?`<a href="#" onclick="event.preventDefault();event.stopPropagation();go('emp',{user:'${r.id}'})" style="color:inherit;font-weight:600">${E(v)}</a>`:fmtS(c,v);return `<td class="${c.t==='l'?'l':c.t==='c'||c.t==='pct'?'c':'n'} ${i<stdFz()?'frz':''}">${nm}${c.k==='name'&&r.code?`<div style="font-size:11px;opacity:.6;font-weight:400">${E(r.code)}${r.pos?' · '+E(r.pos):''}</div>`:''}</td>`}).join('')}</tr>`})});
   const gs=B.sums(B.all);h+=`<tr class="gt">${cols.map((c,i)=>i===0?`<td class="c ${stdFz()>0?'frz':''}"></td>`:i===1?`<td class="l ${stdFz()>1?'frz':''}">TỔNG CỘNG (${B.all.length})</td>`:`<td class="${c.t==='m'||c.t==='d'?'n':'c'}">${c.s?fmtS(c,gs[c.k]):''}</td>`).join('')}</tr></tbody></table></div>`;return h}
-function stdSticky(){const box=document.getElementById('pstd-box');if(!box)return;const trs=[...box.querySelectorAll('thead tr')];let top=0;trs.forEach(tr=>{[...tr.children].forEach(c=>c.style.top=top+'px');top+=tr.offsetHeight});
+function stdSticky(){const box=document.getElementById('pstd-box');if(!box)return;if(window.hxClamp)window.hxClamp(box);const trs=[...box.querySelectorAll('thead tr')];let top=0;trs.forEach(tr=>{[...tr.children].forEach(c=>c.style.top=top+'px');top+=tr.offsetHeight});
   const r2=trs[1];if(!r2)return;const fz=stdFz(),L=[];let left=0;for(let i=0;i<fz;i++){const th=r2.children[i];if(!th)break;L.push(left);left+=th.offsetWidth}
   box.querySelectorAll('tr').forEach(tr=>{L.forEach((x,i)=>{const c=tr.children[i];if(c&&c.classList.contains('frz'))c.style.left=x+'px'})})}
 const stdRender=()=>{const b=document.getElementById('pay-std');if(b){b.innerHTML=stdHtml(PS.rows||[]);setTimeout(stdSticky,0)}};
@@ -8794,9 +8791,11 @@ Object.assign(window.hx,{arCodes:async()=>{const rs=HXD.rows('archive_records').
     const drag=w=>{let x0,y0,sl,st2,on=false,moved=false;w.addEventListener('mousedown',e=>{if(e.button!==0||w.scrollWidth<=w.clientWidth&&w.scrollHeight<=w.clientHeight)return;if(e.target.closest('input,select,button,a,textarea,label,[contenteditable]'))return;on=true;moved=false;x0=e.clientX;y0=e.clientY;sl=w.scrollLeft;st2=w.scrollTop});
       window.addEventListener('mousemove',e=>{if(!on)return;const dx=e.clientX-x0,dy=e.clientY-y0;if(!moved&&Math.abs(dx)+Math.abs(dy)>5){moved=true;w.classList.add('tp-grabbing')}if(moved){w.scrollLeft=sl-dx;w.scrollTop=st2-dy}});
       window.addEventListener('mouseup',()=>{if(on){on=false;w.classList.remove('tp-grabbing')}});w.addEventListener('click',e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false}},true)};
-    const fix=()=>{q=0;document.querySelectorAll('table').forEach(t=>{if(t.dataset.hxw||t.closest(SK)||/(nb|sig|items)/.test(t.className))return;t.dataset.hxw=1;if(t.parentNode&&t.parentNode.classList.contains('tw-auto'))return;const w=document.createElement('div');w.className='tw-auto tp-grab';t.parentNode.insertBefore(w,t);w.appendChild(t);drag(w)})};
+    window.hxClamp=el=>{if(!el||!el.getBoundingClientRect)return;const room=innerWidth-el.getBoundingClientRect().left-16;if(room>200&&el.offsetWidth>room+2){el.style.width=room+'px';el.style.maxWidth=room+'px'}};
+    window.addEventListener('resize',()=>document.querySelectorAll('.pstd,.hxg-w,.tw-auto').forEach(e=>{e.style.width='';e.style.maxWidth='';window.hxClamp(e)}));
+    const fix=()=>{q=0;document.querySelectorAll('.pstd,.hxg-w,.tw-auto').forEach(window.hxClamp);document.querySelectorAll('table').forEach(t=>{if(t.dataset.hxw||t.closest(SK)||/(nb|sig|items)/.test(t.className))return;t.dataset.hxw=1;if(t.parentNode&&t.parentNode.classList.contains('tw-auto'))return;const w=document.createElement('div');w.className='tw-auto tp-grab';t.parentNode.insertBefore(w,t);w.appendChild(t);drag(w)})};
     new MutationObserver(()=>{if(!q)q=requestAnimationFrame(fix)}).observe(document.body,{childList:true,subtree:true});fix()})();
-  window.HR_BUILD='2026-11-13.1';
+  window.HR_BUILD='2026-11-14.1';
 })();
 </script>
 </body>
